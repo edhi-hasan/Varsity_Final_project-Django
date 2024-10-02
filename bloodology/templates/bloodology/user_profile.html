@@ -1,0 +1,53 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="dp_card">
+    <div class="profile-card-unique">
+        <div class="profile-img-unique">
+            <img src="{{ profile.profile_img.url }}" alt="Donor Image" class="donor-image">
+        </div>
+        <div class="profile-info-unique">
+            <h2 class="profile-name-unique">{{ profile.name }}</h2>
+            <p class="profile-blood-group-unique">Blood Group: {{ profile.blood_group }}</p>
+            <p class="profile-phone-unique">Phone: {{ profile.phone_number }}</p>
+            <p class="profile-address-unique">Address: {{ profile.address }}</p>
+        </div>
+        <div class="profile-actions-unique">
+            <button class="btn-unique edit-btn-unique">Edit</button>
+            <!-- Added onclick to trigger the confirmation dialog -->
+            <button class="btn-unique delete-btn-unique" onclick="showConfirmation()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Popup -->
+<div id="deleteConfirmation" class="confirmation-overlay" style="display: none;">
+    <div class="confirmation-dialog">
+        <p>Are you sure you want to delete your profile?</p>
+        <div class="confirmation-buttons">
+            <button class="btn-confirm" onclick="deleteProfile()">Yes</button>
+            <button class="btn-cancel" onclick="hideConfirmation()">No</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Confirmation for delete
+function showConfirmation() {
+    document.getElementById("deleteConfirmation").style.display = "flex";
+}
+
+function hideConfirmation() {
+    document.getElementById("deleteConfirmation").style.display = "none";
+}
+
+function deleteProfile() {
+    // Add your deletion logic here
+    alert("Profile deleted!");
+    hideConfirmation();
+}
+</script>
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="container">
+            <div class="row justify-content-center my-3">
+                <div class="col-md-6 bg-gradient">
+                    <div class="req-form">
+                        <h3 class="text-light text-center text-bg-danger p-2 my-3">SignUp</h3>
+                        <form action="" method="POST" enctype="multipart/form-data" novalidate>{% csrf_token %}
+                            {% for fm in form %}
+                                {{fm.label_tag}}{{fm}}{{fm.errors|striptags}}
+                            {% endfor %}
+                            <input type="submit" value="Add" class="btn btn-primary mt-2">
+                            
+                            {% if form.non_fields_errors %}
+                                
+                                {% for error in form.non_fields_errors %}
+                                    <p class='alert alert-danger my-3'>{{error}}</p>
+                                {% endfor %}
+                                    
+                            {% endif %} 
+                                
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

@@ -1,0 +1,55 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="container">
+        <div class="row justify-content-center my-3">
+            <div class="col-md-6 bg-gradient">
+                <div class="req-form">
+                    {% if messages %}
+                    <div class="messages-container">
+                        {% for message in messages %}
+                            {% if message.tags == "success" %}
+                                <div class="alert alert-success">
+                            {% elif message.tags == "error" %}
+                                <div class="alert alert-danger">
+                            {% elif message.tags == "warning" %}
+                                <div class="alert alert-warning">
+                            {% elif message.tags == "info" %}
+                                <div class="alert alert-info">
+                            {% else %}
+                                <div class="alert">
+                            {% endif %}
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                
+                    <h3 class="text-light text-center text-bg-danger p-2 my-3">Login</h3>
+                    <form action="" method="post" class='form_margin'> {% csrf_token %}
+            
+                        {% for fm in form %}
+                            <div class="form-group">
+                                {{fm.label_tag}}{{fm}}<span class="text-warning">{{fm.errors|striptags}}</span>
+                            </div>
+                        {% endfor %}
+                        <input type="submit" value="Login" class='btn btn-primary mt-2'>
+                        
+                        {% if form.non_field_errors %}
+                            
+                            {% for error in form.non_field_errors %}
+                                <p class="alert alert-danger my-3">{{error}}</p>
+                            {% endfor %}
+                            
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

@@ -1,0 +1,702 @@
+*{
+    margin: 0;
+    border: border-box;
+    font-family: sans-serif;
+}
+
+/******************** Navigation var *************************/
+.navigation{
+    height: 70px;
+    background-color: rgb(241, 23, 23);
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.nav-logo{
+    height: 65px;
+    width: 120px;
+}
+.logo{
+    background-image: url('../image/final-logo.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    height: 65px;
+    width: 120px;
+}
+.navigation a{
+    text-decoration: none;
+    color: rgb(248, 244, 244);
+    font-weight: 550;
+}
+
+/******************** Container part *************************/
+
+.container1{
+    height: 530px;
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(135deg, #e77777, #ffffff);
+}
+.container-1{
+    margin-top: 130px;
+}
+.container-1 p{
+    margin-top: 30px;
+}
+.container-1 button{
+    height: 30px;
+    margin-top: 30px;
+    background-color: red;
+    border: 1px solid white;
+    border-radius: 15px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.container-1 button:hover{
+    background-color: rgb(17, 16, 16);
+    
+}
+.container-1 button a{
+    text-decoration: none;
+    color: white;
+}
+.container-pic{
+    margin-top: 20px;
+}
+#slideshow img{
+    height: 400px;
+    width: 400px;
+}
+
+
+/* <======================Request Post For Blood======================> */
+.request-post {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background-color: rgb(248, 246, 246);
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align items horizontally */
+    text-align: center; /* Center text within items */
+}
+.request-post h2 {
+    color: red;
+}
+
+.request-post a {
+    text-decoration: none;
+    font-weight: 550;
+    color: black;
+}
+.all-post {
+    margin: 20px;  /* Center the container */
+}
+
+.post-page {
+    padding: 0px; /* Adjust padding if necessary */
+    
+}
+.post-page .create_at{
+    font-size: xx-small;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.blood-request-card-alt_p {
+    border: 1px solid #ccc; /* Optional: Add border for better visibility */
+    border-radius: 10px; /* Optional: Add border radius */
+
+}
+
+.update_time{
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.blood-request-card-alt_p {
+    width: 350px;
+    max-width: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e4d9d9, #ffffff);
+    color: #0a0909;
+    box-shadow: 0 8px 15px rgba(180, 179, 179, 0.788);
+    padding: 10px;
+}
+
+.card-header_p {
+    margin: auto;
+    padding: 20px;
+    line-height: 0.1cm;
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.card-header_p h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0px;
+}
+.card-header_p p {
+    margin-top: 10px;
+    font-size: 1.em;
+    font-weight: bold;
+}
+
+.card-body_p {
+    padding-left: 0;
+    text-align: left;
+    font-weight: bold;
+    line-height: 0.5cm;
+    font-size: 15px;
+    margin: 15px;
+}
+
+.card-body_p p {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+.location, .phone-number {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.phone-number::before {
+    content: '📞'; /* Phone emoji */
+}
+
+.disease-name::before {
+    content: '🩺'; /* Stethoscope emoji */
+}
+
+.disease-name {
+    font-weight: bold; /* Corrected to apply font weight */
+}
+
+.blood-group::before {
+    content: '🩸'; /* Blood drop emoji */
+}
+
+.seemore{
+    margin-bottom: 10px;
+}
+
+/*------------ donor profile  ----------------*/
+
+.donor_profile_sec{
+    background-color: #f5ecec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.donor_profile_sec h2{
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+
+}
+
+.donor-profile{
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: center; /* Distribute items with equal spacing */
+    margin-bottom: 10px;
+    margin-left: 40px;
+    
+}
+
+.donor-parts{
+    flex: 0 1 calc(25% - 60px); /* Ensures 3 items per row */
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.donor-profile-card-modern {
+    width: 100%;
+    max-width: 280px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e5b1b1, #ffffff);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.donor-profile-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    padding: 15px;
+    position: relative;
+    width: 300px;
+    height: 180px;
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    text-align: center;
+}
+
+
+.donor-image {
+    margin-top: 20px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid #ee5757; /* Bold border */
+    position: absolute;
+    top: 10px; /* Overlapping effect */
+    left: 45%;
+    transform: translateX(-50%);
+}
+.card-header h2{
+    margin-top: 120px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+    line-height: 0.3cm;
+}
+
+.blood-group,
+.phone-number,
+.addresses
+ {
+    font-size: 1em;
+    color: #1b1a1a;
+    font-family: 'Times New Roman', Times, serif;
+}
+.addresses{
+    line-height: normal;
+    margin: 0px 30px 0px 30px;
+}
+
+.seemore{
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: rgb(7, 7, 7);
+    font-weight: 550;
+}
+
+
+/*------------CSS for Search Donators----------------*/
+.search-donators{
+    height: 300px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search{
+    width: 80%;
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f3eeee;
+    border-radius: 6px;
+}
+.search-area{
+    height: 25px;
+    width: 150px;
+    border-radius: 8px;
+}
+.bd-group p{
+    margin-bottom: 8px;
+}
+.search button{
+    height: 40px;
+    width: 100px;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    font-weight: 550;
+    border: none;
+    transition: 0.5s;
+}
+.search button:hover{
+    background-color:black;
+    cursor: pointer;
+    transform: 5s;
+    
+}
+.totaldonor{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.totaldonor button{
+    margin-bottom: 20px;
+    height: 30px;
+    width: 100px;
+    background-color: red;
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    transition: 0.5s;
+}
+.totaldonor button:hover{
+    background-color: black;
+    cursor: pointer;
+}
+.totalhead{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 75%;
+    background-color: red;
+    color: white;
+    margin-top: 20px;
+}
+.donors{
+    display: flex;
+    margin: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+/* --------- Compatible---------------*/
+.compatible-blood h2{
+    text-align: center;
+    margin-top: 40px;
+    color:red;
+}
+.compatible{
+    height: 450px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin-left: 150px;
+}
+#Bloods {
+    font-family: sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #Bloods td, #Bloods th {
+    border: 1px solid #dad4d4;
+    padding: 8px;
+  }
+  
+  #Bloods tr:nth-child(even){background-color: #dfdada;}
+  
+  #Bloods tr:hover {
+    background-color: #ddd;
+    color: rgb(247, 4, 4);
+}
+
+#table_head{
+    background-color: red;
+    color: white;
+}
+
+
+/*------------ quote section ----------------*/
+.quote-sec{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.quote{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 10px;
+    margin-top:20px ;
+    margin-bottom: 20px;
+    height: 150px;
+    width: 300px;
+    /* border: 1px solid black; */
+    border-radius: 4px;
+    box-shadow: 3px 5px 5px 3px #cfcece;
+}
+.quote p{
+    margin: 5px;
+}
+
+
+
+/*------------ footer section ----------------*/
+
+.footer-1{
+    height: 250px;
+    background-color: rgb(240, 60, 60);
+    color: rgb(243, 243, 243);
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.footer-1 h3{
+    padding-bottom: 10px;
+}
+.advantage h4 a{
+    text-decoration: none;
+    color: white;
+    line-height: 30px;
+}
+.about{
+    width: 400px;
+}
+
+.important-link a{
+    text-decoration: none;
+    color: rgb(238, 238, 238);
+    line-height: 30px;
+}
+
+.footer-2{
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(22, 21, 21);
+    color: rgb(202, 192, 192);
+}
+.footer-2 h3{
+    padding-bottom: 10px;
+}
+.address{
+    text-align: center;
+    line-height: 15px;
+    color: white;
+}
+.msg textarea{
+    background-color: rgb(29, 29, 37);
+    border-radius: 5px;
+}
+.msg button{
+    background-color: rgb(6, 110, 110);
+    color: white;
+    height: 30px;
+    border-radius: 5px;
+    transition: 0.5s;
+    border: 0.5px solid gray;
+    cursor: pointer;
+}
+.msg button:hover{
+    background-color: rgb(75, 72, 72);
+}
+.copyright{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid white;
+    background-color: rgb(13, 13, 20);
+    height: 40px;
+    color: rgb(238, 238, 238);
+}
+
+/* <============= request Post form ================> */
+.req-form .form-control{
+    background-color: rgb(241, 212, 212);
+}
+
+
+
+
+/* <=====================All Question====================> */
+
+.Question{
+    margin-left: 280px;
+    margin-right: 250px;
+    margin-top: 80px;
+}
+
+
+/* <=====================Profile Card====================> */
+
+.dp_card{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.profile-card-unique {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    height: 300px;
+    background: linear-gradient(135deg, #0e56b4, #e64862);
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    color: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.profile-img-unique {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 10px; /* Add padding on all sides for better positioning */
+    height: 100%; /* Ensure the container takes full height */
+}
+
+.profile-img-unique img {
+    width: 130px;
+    height: 130px;
+    border-radius: 15%;
+    border: 1px solid #555252;
+    object-fit: cover; /* Ensure the image doesn't stretch */
+    display: block; /* Remove any possible inline spacing */
+    margin-left: 90px;
+    margin-top: 73px;
+}
+
+
+
+.profile-info-unique {
+    flex: 2;
+    padding: 20px 30px;
+    position: relative;
+    z-index: 2;
+    margin-left: 135px;
+}
+
+.profile-name-unique {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-blood-group-unique,
+.profile-phone-unique,
+.profile-address-unique {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.profile-actions-unique {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    z-index: 2;
+}
+
+.btn-unique {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 3px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-btn-unique {
+    background-color: #4caf50;
+    color: white;
+}
+
+.delete-btn-unique {
+    background-color: #ff5252;
+    color: white;
+}
+
+.btn-unique:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Diagonal separator */
+.profile-card-unique::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+    z-index: 1;
+}
+
+
+/* Confirmation overlay */
+.confirmation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.confirmation-dialog {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.confirmation-dialog p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-confirm {
+    padding: 10px 20px;
+    background-color: #e64862;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-confirm:hover,
+.btn-cancel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}

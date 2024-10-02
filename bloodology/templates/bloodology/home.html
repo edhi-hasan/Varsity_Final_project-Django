@@ -1,0 +1,128 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+    
+        <!-- Container part -->
+        <div class="container1">
+            <div class="container-1">
+                <h1>The gift of blood is a gift<br />to someones life</h1>
+                <p>Bloodology help with anything related to blood. It helps manage blood donations and events <br>where people can give blood. It also links up donors with people who need blood. <br> Bloodology makes it simple to get involved in this important work.</p>
+                
+                {% if request.user.is_authenticated %}
+                <button><a href="{% url 'addRequest' %}">Add Blood Request</a></button>
+                {% else %}
+                <button> <a href="signup.html">Join as Donors</a></button>
+                {% endif %}
+                    
+                    
+            </div>
+            <div class="container-pic">
+                <div id="slideshow">
+                    <img src="{% static 'bloodology/image/img1.png' %}" id="image" />
+                </div>
+                <!-- Java Script for changing picture -->
+                <script>
+                    var images = [
+                        "{% static 'bloodology/image/img1.png' %}",
+                        "{% static 'bloodology/image/img2.png' %}",
+                        "{% static 'bloodology/image/img3.png' %}",
+                        "{% static 'bloodology/image/img6.png' %}",
+                        "{% static 'bloodology/image/img7.png' %}",
+                    ];
+                    var currentIndex = 0;
+                    var image = document.getElementById("image");
+                    setInterval(function () {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        image.src = images[currentIndex];
+                    }, 3000); 
+                </script>
+            </div>
+            
+        </div>
+    
+        <!------------- Request Post For Blood ---------------->
+    
+        <div class="request-post justify-content-center">
+            <h2><b>Blood Request Post</b></h2>
+            <div class="all-post row justify-content-center col-sm-10">  <!-- Added 'justify-content-center' class -->
+                {% for post in posts %}
+                    <div class="post-page col-md-4 mb-2">  <!-- Use Bootstrap column class and add margin-bottom -->
+                        <div class="blood-request-card-alt_p">
+                            <div class="card-header_p">
+                                <h2 class="blood-group">{{ post.blood_group }}</h2>
+                                <p class="date-time">{{ post.date_time }}</p>
+                            </div>
+                            <div class="card-body_p">
+                                <p class="disease-name" style='font: bold;'>Disease: {{ post.Disease_name }}</p>
+                                <p class="number-of-bags">Bags Needed: {{ post.No_of_bag }}</p>
+                                <p class="location">Medical: {{ post.medical_name }}</p>
+                                <p class="location">Location: {{ post.location }}</p>
+                                <p class="phone-number">Phone: {{ post.phone_number }}</p>
+                            </div>
+                        </div>
+                        <p class="create_at">Post at: {{post.created_at}}</p>
+                    </div>
+                {% empty %}
+                    <p>No blood request posts available.</p>  <!-- Message if no posts -->
+                {% endfor %}
+            </div>
+            <a href="all-post-request.html" class="seemore">See more...</a>
+        </div>
+        
+        
+        
+
+        {% comment %} <----------------donors Profile----------------->  {% endcomment %}
+    <div class="donor_profile_sec">
+        <h2>Donors profile</h2>
+        
+        <div class="donor-profile">
+            {% for profile in profiles %}
+            <div class="donor-parts">
+                <div class="donor-profile-card-modern">
+                    <div class="card-header">
+                        {% if profile.profile_img %}
+                            <img src="{{ profile.profile_img.url }}" alt="Donor Image" class="donor-image">
+                        {% else %}
+                            <img src="{% static 'bloodology/image/image.png' %}" alt="Default Donor Image" class="donor-image">
+                        {% endif %}
+                        <h2>{{ profile.name }}</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="blood-group">Blood Group: {{ profile.blood_group }}</p>
+                        <p class="phone-number">Phone: {{ profile.phone_number }}</p>
+                        <p class="addresses">Address: {{ profile.address }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+            
+
+        
+        <a href="donors-profile.html" class="seemore">See more...</a>
+    </div>
+
+        <!--------------- Quote Section ---------------->
+    
+        <div class="quote-sec">
+            <div class="quote">
+                <i class="fa fa-quote-left" style="font-size:48px;color:red"></i>
+                <p>Take care of yourself, eat well, and donate blood.</p>
+            </div>
+            <div class="quote">
+                <i class="fa fa-quote-left" style="font-size:48px;color:red"></i>
+                <p>Once a blood donor is always a lifesaver.</p>
+            </div>
+            <div class="quote">
+                <i class="fa fa-quote-left" style="font-size:48px;color:red"></i>
+                <p>Donating blood can make a big difference.</p>
+            </div>
+        </div>
+    
+{% endblock content %}
+    
+
+
