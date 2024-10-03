@@ -44,7 +44,7 @@ class UserRegistrationForm(UserCreationForm):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     phone_number = forms.CharField(max_length=15, label='Phone Number', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    address = forms.CharField(max_length=250, label='Address', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    address = forms.CharField(max_length=250, label='Address', widget=forms.TextInput( attrs={'class': 'form-control'}))
     profile_img = forms.ImageField(required=False, label='Image', widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
     username = forms.CharField(label='User Name', widget=forms.TextInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))

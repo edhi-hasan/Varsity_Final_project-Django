@@ -11,4 +11,6 @@ urlpatterns = [
     path('search',views.search,name='search'),
     path('profile',views.user_profile,name='profile'),
     path('AboutBdonation',views.AboutBdonation,name='AboutBdonation'),
+    path('deleteProfile/<int:id>/',views.deleteProfile, name="deleteProfile"),
+    path('<int:id>/',views.updateProfile, name="updateProfile")
 ]

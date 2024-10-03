@@ -605,7 +605,10 @@
     padding: 20px;
     z-index: 2;
 }
-
+.profile-actions-unique a{
+    text-decoration: none;
+    color: white;
+}
 .btn-unique {
     padding: 10px 20px;
     border: none;
@@ -613,6 +616,7 @@
     cursor: pointer;
     margin: 3px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
 .edit-btn-unique {
@@ -700,3 +704,5 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
+
+

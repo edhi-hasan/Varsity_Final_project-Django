@@ -4,6 +4,7 @@ from . models import BloodRequestPost, UserProfile
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from . models import User
 
 
 # Create your views here.
@@ -87,3 +88,58 @@ def search(request):
 
 def AboutBdonation(request):
     return render(request,'bloodology/question-about-blood.html')
+
+
+# <================== delete profile ====================> 
+
+def deleteProfile(request, id):
+    if request.method == "POST":
+        profile = get_object_or_404(UserProfile, id=id)
+        profile.delete()
+
+        logout(request)
+
+        messages.success(request, "Your profile has been deleted successfully.")
+
+        return redirect('home')  
+    
+    return redirect('home')  
+    
+
+# <================== Update/Edit profile ====================> 
+def updateProfile(request, id):
+    user_instance = User.objects.get(pk=id)  # Get the user instance
+    user_profile = UserProfile.objects.get(user=user_instance)  # Get the associated UserProfile
+
+    if request.method == "POST":
+        # Initialize the form with POST data and the user instance
+        fm = UserRegistrationForm(request.POST, request.FILES, instance=user_instance)
+        if fm.is_valid():
+            user = fm.save(commit=False)  # Save user but don't commit yet
+            # Update UserProfile data
+            user_profile.name = fm.cleaned_data['name']
+            user_profile.blood_group = fm.cleaned_data['blood_group']
+            user_profile.phone_number = fm.cleaned_data['phone_number']
+            user_profile.address = fm.cleaned_data['address']
+            user_profile.profile_img = fm.cleaned_data.get('profile_img', user_profile.profile_img)  # Keep existing image if none is provided
+            user_profile.save()  # Save the UserProfile instance
+            user.save()  # Save the User instance
+            return redirect('login')  # Redirect to home or a success page after saving
+    else:
+        # On GET request, load the data into the form
+        initial_data = {
+            'name': user_profile.name,
+            'blood_group': user_profile.blood_group,
+            'phone_number': user_profile.phone_number,
+            'address': user_profile.address,
+            'profile_img': user_profile.profile_img,
+        }
+        fm = UserRegistrationForm(instance=user_instance)
+        fm.fields['name'].initial = initial_data['name']
+        fm.fields['blood_group'].initial = initial_data['blood_group']
+        fm.fields['phone_number'].initial = initial_data['phone_number']
+        fm.fields['address'].initial = initial_data['address']
+        # No need to set initial for profile_img as it should be handled in the form directly
+
+    return render(request, 'bloodology/UpdateProfile.html', {'form': fm})
+
