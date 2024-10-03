@@ -543,7 +543,7 @@
 .profile-card-unique {
     display: flex;
     flex-direction: row;
-    width: 600px;
+    width: 650px;
     height: 300px;
     background: linear-gradient(135deg, #0e56b4, #e64862);
     border-radius: 10px;
@@ -705,4 +705,21 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* signUp form  */
+
+/* Make the form-row display flex */
+.form-row {
+    display: flex;
+    gap: 15px; /* Adjusts space between the fields */
+    margin-bottom: 0px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Add some general padding and margin for individual form groups */
+.form-group {
+    margin-bottom: 2px;
+}
 

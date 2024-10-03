@@ -1,7 +1,6 @@
 {% extends 'bloodology/base.html' %}
 {% load static %}
 
-
 {% block content %}
     <div class="container">
         <div class="container">
@@ -9,20 +8,79 @@
                 <div class="col-md-6 bg-gradient">
                     <div class="req-form">
                         <h3 class="text-light text-center text-bg-danger p-2 my-3">SignUp</h3>
-                        <form action="" method="POST" enctype="multipart/form-data" novalidate>{% csrf_token %}
-                            {% for fm in form %}
-                                {{fm.label_tag}}{{fm}}{{fm.errors|striptags}}
-                            {% endfor %}
+                        <form action="" method="POST" enctype="multipart/form-data" novalidate>
+                            {% csrf_token %}
+
+                            <!-- Username -->
+                            <div class="form-group">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                                {{ form.username.errors|striptags }}
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                                {{ form.email.errors|striptags }}
+                            </div>
+
+                            <!-- Name -->
+                            <div class="form-group">
+                                {{ form.name.label_tag }}
+                                {{ form.name }}
+                                {{ form.name.errors|striptags }}
+                            </div>
+
+                            <!-- Password and Confirm Password in one line -->
+                            <div class="form-row">
+                                <div class="form-group flex-child">
+                                    {{ form.password1.label_tag }}
+                                    {{ form.password1 }}
+                                    {{ form.password1.errors|striptags }}
+                                </div>
+                                <div class="form-group flex-child">
+                                    {{ form.password2.label_tag }}
+                                    {{ form.password2 }}
+                                    {{ form.password2.errors|striptags }}
+                                </div>
+                            </div>
+
+                            <!-- Blood Group and Phone Number in one line -->
+                            <div class="form-row">
+                                <div class="form-group flex-child">
+                                    {{ form.blood_group.label_tag }}
+                                    {{ form.blood_group }}
+                                    {{ form.blood_group.errors|striptags }}
+                                </div>
+                                <div class="form-group flex-child">
+                                    {{ form.phone_number.label_tag }}
+                                    {{ form.phone_number }}
+                                    {{ form.phone_number.errors|striptags }}
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="form-group">
+                                {{ form.address.label_tag }}
+                                {{ form.address }}
+                                {{ form.address.errors|striptags }}
+                            </div>
+
+                            <!-- Profile Image -->
+                            <div class="form-group">
+                                {{ form.profile_img.label_tag }}
+                                {{ form.profile_img }}
+                                {{ form.profile_img.errors|striptags }}
+                            </div>
+
                             <input type="submit" value="Add" class="btn btn-primary mt-2">
-                            
+
                             {% if form.non_fields_errors %}
-                                
                                 {% for error in form.non_fields_errors %}
                                     <p class='alert alert-danger my-3'>{{error}}</p>
                                 {% endfor %}
-                                    
-                            {% endif %} 
-                                
+                            {% endif %}
                         </form>
                     </div>
                 </div>
@@ -30,4 +88,3 @@
         </div>
     </div>
 {% endblock content %}
-    
