@@ -5,30 +5,93 @@
 }
 
 /******************** Navigation var *************************/
-.navigation{
+
+
+/*==============*/
+.navigation {
     height: 70px;
-    background-color: rgb(241, 23, 23);
-    color: white;
+    background-color: rgb(255, 6, 6);
+    
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between; /* Distribute space between the left and right sections */
+    align-items: center;
+    padding: 0 20px; /* Optional padding for better spacing */
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
     align-items: center;
 }
-.nav-logo{
+
+.nav-logo {
     height: 65px;
     width: 120px;
+    margin-right: 20px; /* Adds some spacing between the logo and the next nav item */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.logo{
-    background-image: url('../image/final-logo.png');
-    background-size:contain;
+.nav-logo a{
+    font-size: 1.5rem;
+    font-weight: 50px;
+}
+
+.logo {
+    background-image: url('../image/blood.png');
+    background-size: contain;
     background-repeat: no-repeat;
     height: 65px;
     width: 120px;
 }
-.navigation a{
+
+.navigation a {
     text-decoration: none;
-    color: rgb(248, 244, 244);
+    color: rgb(255, 255, 255);
     font-weight: 550;
+    margin-left: 15px; /* Adds some spacing between the links */
 }
+
+.nav-right a {
+    margin-left: 25px; /* More spacing between the right-side links */
+}
+.dprofile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.user-dropdown {
+    position: relative; /* Positioning for the dropdown */
+}
+
+.dropdown-content {
+    display: none; /* Initially hidden */
+    position: absolute; /* Positioned below the user profile link */
+    background-color: rgb(241, 23, 23); /* Match navbar background */
+    min-width: 160px; /* Set a width for the dropdown */
+    z-index: 1; /* Ensure it appears above other content */
+}
+
+.user-dropdown.active .dropdown-content {
+    display: block; /* Show dropdown when parent is active */
+}
+
+.dropdown-content a {
+    color: rgb(248, 244, 244); /* Link color */
+    padding: 12px 16px; /* Spacing for links */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Each link takes a full line */
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Highlight on hover */
+}
+
+
 
 /******************** Container part *************************/
 
@@ -37,6 +100,8 @@
     display: flex;
     justify-content: space-evenly;
     background: linear-gradient(135deg, #e77777, #ffffff);
+    /* background-image: url('../image/containter.jpg'); */
+    object-fit: cover;
 }
 .container-1{
     margin-top: 130px;
@@ -534,7 +599,8 @@
 .Question{
     margin-left: 280px;
     margin-right: 250px;
-    margin-top: 80px;
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 
@@ -592,7 +658,7 @@
     margin-left: 135px;
 }
 .profile-info-unique b{
-    color: #0a0909;
+    color: #ffffff;
 }
 
 .profile-name-unique {

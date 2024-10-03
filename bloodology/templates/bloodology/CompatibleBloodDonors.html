@@ -1,0 +1,68 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Blood Donation tips -->
+
+    <div class="all-question">
+        <div class="Question">
+            <h1>Compatible Blood Type Donors</h1><br>
+             <table id="Bloods">
+                <tr id="table_head">
+                  <td>Blood Type</td>
+                  <td>Donate Blood To</td>
+                  <td>Receive Blood From</td>
+                </tr>
+                <tr>
+                  <td>A+</td>
+                  <td>A+, AB+</td>
+                  <td>A+, A-, O+, O-</td>
+                </tr>
+    
+                <tr>
+                  <td>O+</td>
+                  <td>A+, AB+, O+, B+</td>
+                  <td>O+, O-</td>
+                </tr>
+    
+                <tr>
+                  <td>B+</td>
+                  <td>AB+, B+</td>
+                  <td>O+, O-, B+, B-</td>
+                </tr>
+    
+                <tr>
+                  <td>AB+</td>
+                  <td>AB+</td>
+                  <td>Everyone</td>
+                </tr>
+    
+                <tr>
+                  <td>B-</td>
+                  <td>B+, AB+, B-, AB-</td>
+                  <td>B-, O-</td>
+                </tr>
+    
+                <tr>
+                  <td>A-</td>
+                  <td>A+, AB+, A-, AB-</td>
+                  <td>A-, O-</td>
+                </tr>
+    
+                <tr>
+                  <td>O-</td>
+                  <td>Everyone</td>
+                  <td>O-</td>
+                </tr>
+    
+                <tr>
+                  <td>AB-</td>
+                  <td>AB-, AB+</td>
+                  <td>AB-, A-, B-, O-</td>
+                </tr>
+              </table>
+        </div>
+    </div>
+
+{% endblock content %}

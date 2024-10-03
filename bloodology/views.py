@@ -11,15 +11,14 @@ from . models import User
 # Create your views here.
 
 def home(request):
-    reqPost = BloodRequestPost.objects.all().order_by('-created_at')[:9]
-    userProfiles = UserProfile.objects.all() 
+    reqPost = BloodRequestPost.objects.all().order_by('-created_at')[:6]
+    userProfiles = UserProfile.objects.all()[:4]
     return render(request, 'bloodology/home.html', {'posts': reqPost, 'profiles': userProfiles})
 
 
 #All Blood request POST
 def all_posts(request):
     posts = BloodRequestPost.objects.all().order_by('-created_at') 
-    
     return render(request, 'bloodology/all_blood_request_Post.html', {'posts': posts})
 
 #All Donors Profile
@@ -100,18 +99,6 @@ def user_login(request):
         return redirect('home')
 
 
-#User Logout
-def user_logout(request):
-    logout(request)
-    return redirect('home')
-
-
-def search(request):
-    return render(request,'bloodology/search.html')
-
-
-def AboutBdonation(request):
-    return render(request,'bloodology/question-about-blood.html')
 
 
 # <================== delete profile ====================> 
@@ -167,3 +154,26 @@ def updateProfile(request, id):
 
     return render(request, 'bloodology/UpdateProfile.html', {'form': fm})
 
+#User Logout
+def user_logout(request):
+    logout(request)
+    return redirect('home')
+
+#Blood Donation Tips
+def Blood_Donation_Tips(request):
+    return render(request,'bloodology/Blood_Donation_Tips.html')
+
+#Advantage Of Blood Donation
+def advantageOfdonation(request):
+    return render(request,'bloodology/advantageofblood.html')
+#Question About Blood Donation
+def AboutBdonation(request):
+    return render(request,'bloodology/question-about-blood.html')
+
+#Compatible Blood Donors
+def CompatibleBloodDonors(request):
+    return render(request,'bloodology/CompatibleBloodDonors.html')
+
+#About Us
+def AboutUs(request):
+    return render(request,'bloodology/AboutUs.html')

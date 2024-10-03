@@ -13,24 +13,25 @@
     .input-group {
         display: flex;
         align-items: center;
-        border: 1px solid #ccc; /* Border for the entire input group */
         border-radius: 5px; /* Rounded corners */
         overflow: hidden; /* Prevent inner elements from exceeding the container */
-        width: 300px; /* Full width of the parent container */
+        width: 500px; /* Full width of the parent container */
         max-width: 800px; /* Maximum width of the input group */
     }
     
     .form-select {
         padding: 10px; /* Add padding */
-        border: none; /* Remove default border */
+        border: 1px solid #ccc;
         outline: none; /* Remove outline */
         flex: 1; /* Allow the select to take up available space */
         font-size: 16px; /* Font size */
         color: #333; /* Text color */
         width: 100%; /* Full width */
+        margin-right:3px;
     }
     
     .btn-search {
+        margin-left:10px;
         background-color: red; /* Button color */
         color: white; /* Text color */
         border: none; /* Remove border */
@@ -55,7 +56,7 @@
 
 <div class="donor_profile_sec">
     <div class="col-10 text-center">
-        <h2 class="p-2 mb-4 bg-info text-dark">Donors Profile</h2>
+        <h2 class="p-2 mb-1 text-danger">Donors Profile</h2>
     </div>
     <!-- Search Form -->
     <form method="GET" action="{% url 'All_Donors' %}" class="search-form">
@@ -78,7 +79,7 @@
     </form>
     
     
-    <div class="donor-profile mt-4">
+    <div class="donor-profile mt-2">
         {% for profile in posts %}
         <div class="donor-parts">
             <div class="donor-profile-card-modern">

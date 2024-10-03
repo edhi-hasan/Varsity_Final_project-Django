@@ -13,24 +13,60 @@
     <!-- navigation bar -->
     
     <div class="navigation">
-        <div class="nav-logo">
-            <div class="logo"></div>
-        </div>
-        <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#">About Us</a>
-        
-        {% if request.user.is_authenticated %}
-            <a href="Search-donors.html"><i class="fa-solid fa-magnifying-glass"></i> Search Donors </a>
-            <a href="{% url 'addRequest' %}">Add Blood Request</a>
-            <a href="{% url 'logout' %}"><i class="fa-solid fa-user-plus"></i> LogOut</a>
-            <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-        {% else %}
-            <a href="{% url 'signUp' %}"><i class="fa-solid fa-user-plus"></i> SignUp</a>
-            <a href="{% url 'login' %}"><i class="fa-solid fa-user-plus"></i> Login</a>
-        {% endif %}
-            
-    </div>
+        <div class="nav-left">
+            <div class="nav-logo">
+                <a href="{% url 'home' %}">Bloodology</a>
+            </div>
 
+            
+        </div>
+    
+        <div class="nav-right">
+            <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="{% url 'All_Donors' %}"><i class="fa-solid fa-search"></i> Search Donor</a>
+            {% if request.user.is_authenticated %}
+                <div class="user-dropdown">
+                    <a href="#" class="user-profile" onclick="toggleDropdown(event)">
+                        {% if request.user.userprofile %}
+                            <img src="{{ request.user.userprofile.profile_img.url }}" alt="Profile Image" class="dprofile-img">
+                            {{ request.user.userprofile.name }}	<i class='fas fa-angle-down'></i>
+                        {% else %}
+                        <img src="{% static 'bloodology/image/image.png' %}" alt="Admin" class="dprofile-img">
+                            Admin Profile <i class='fas fa-angle-down'></i>
+                        {% endif %}
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'addRequest' %}">Add Blood Request</a>
+                        <a href="{% url 'profile' %}">Profile</a>
+                        <a href="{% url 'About' %}">About Us</a>
+                        <a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> LogOut</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'signUp' %}"><i class="fa-solid fa-user-plus"></i> SignUp</a>
+                <a href="{% url 'login' %}"><i class="fa-solid fa-user-plus"></i> Login</a>
+            {% endif %}
+            
+        </div>
+    </div>
+    
+    <script>
+        function toggleDropdown(event) {
+            event.preventDefault(); // Prevent default action
+            const userDropdown = event.currentTarget.closest('.user-dropdown');
+            userDropdown.classList.toggle('active'); // Toggle the dropdown
+        }
+        
+        // Close dropdown if clicking outside of it
+        window.addEventListener('click', function(event) {
+            if (!event.target.closest('.user-dropdown')) {
+                document.querySelectorAll('.user-dropdown.active').forEach(dropdown => {
+                    dropdown.classList.remove('active'); // Hide dropdowns if clicked outside
+                });
+            }
+        });
+        
+    </script>
 
     {% block content %}
         
@@ -41,26 +77,26 @@
 
     <!------------- Footer Section ---------------->
     <div class="footer">
-        <div class="footer-1">
+        {% comment %} <div class="footer-1">
             <div class="about">
                 <h3>About Us</h3>
                 <p>Bloodology is a website made by student of premier University for their final project, a tool to help with anything related to blood. It helps manage blood donations and events where people can give blood. It also links up donors with people who need blood. Bloodology makes it simple to get involved in this important work.</p>
             </div>
-            <div class="important-link">
-                <h3>Important Link</h3>
-                <p><a href="index.html">Home</a></p>
-                <p><a href="Add-Blood-Request.html">Add Blood Request</a></p>
-                <p><a href="Search-donors.html">Search Donor</a></p>
-                <p><a href="Compatible-Blood.html">Compatible Blood Type Donors</a></p>
-            </div>
+
             <div class="advantage">
-                <h4><a href="advantage-page.html">Advantage of Donating Blood</a></h4>
-                <h4><a href="blood-donation-tips.html">Blood Donation Tips</a></h4>
+                <h4><a href="{% url 'advantage' %}">Advantage of Donating Blood</a></h4>
+                <h4><a href="{% url 'Blood_Donation_Tips' %}">Blood Donation Tips</a></h4>
                 <h4><a href="{% url 'AboutBdonation' %}">All Question About Blood</a></h4>
+                <h4><a href="{% url 'Compatible' %}">Compatible Blood Type Donors</a></h4>
             </div>
-        </div>
+        </div> {% endcomment %}
         <div class="footer-2">
-            <div class="logo"></div>
+            <div >
+                <div class="about">
+                    <h3>About Us</h3>
+                    <p>Bloodology is a website made by student of premier University for their final project, a tool to help with anything related to blood. It helps manage blood donations and events where people can give blood. It also links up donors with people who need blood. Bloodology makes it simple to get involved in this important work.</p>
+                </div>
+            </div>
             <div class="address">
                 <h3>Address</h3>
                 <p>Academic Building-4</p>
@@ -69,7 +105,7 @@
                 <p><i class="fa-solid fa-phone-volume"></i> +88-031-657892.</p>
             </div>
             <div class="msg">
-                <h3>Advice & Complain here</h3>
+                {% comment %} <h3>Advice & Complain here</h3>
                 <textarea
                     class="t-aria"
                     id="new_message"
@@ -78,7 +114,13 @@
                     rows="4"
                     cols="40"
                 ></textarea><br>
-                <button class="btn" type="submit"><i class="fa-solid fa-paper-plane"></i> Sent</button>
+                <button class="btn" type="submit"><i class="fa-solid fa-paper-plane"></i> Sent</button> {% endcomment %}
+                <div class="advantage">
+                    <h4><a href="{% url 'advantage' %}">Advantage of Donating Blood</a></h4>
+                    <h4><a href="{% url 'Blood_Donation_Tips' %}">Blood Donation Tips</a></h4>
+                    <h4><a href="{% url 'AboutBdonation' %}">All Question About Blood</a></h4>
+                    <h4><a href="{% url 'Compatible' %}">Compatible Blood Type Donors</a></h4>
+                </div>
             </div>
         </div>
         <div class="copyright">
@@ -86,7 +128,9 @@
         </div>
     </div>
 
-
-    {% comment %} <script src="{% static 'bloodology/js/script.js' %}"></script> {% endcomment %}
+    <script src="{% static 'bloodology/js/script.js' %}"></script>
+    <script src="{% static 'bloodology/js/bootstrap.js' %}"></script>
+    <script src="{% static 'bloodology/js/jquery.js' %}"></script>
+    <script src="{% static 'bloodology/js/proper.js' %}"></script>
 </body>
 </html>
