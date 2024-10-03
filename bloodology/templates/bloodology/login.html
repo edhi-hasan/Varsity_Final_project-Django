@@ -27,7 +27,6 @@
                     </div>
                 {% endif %}
                 
-                
                     <h3 class="text-light text-center text-bg-danger p-2 my-3">Login</h3>
                     <form action="" method="post" class='form_margin'> {% csrf_token %}
             
@@ -36,15 +35,20 @@
                                 {{fm.label_tag}}{{fm}}<span class="text-warning">{{fm.errors|striptags}}</span>
                             </div>
                         {% endfor %}
+                        
+                        <!-- Show Password Checkbox -->
+                        <div class="form-group">
+                            <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()"> 
+                            <label for="showPassword" class="text-dark">Show Password</label>
+                        </div>
+                        
                         <input type="submit" value="Login" class='btn btn-primary mt-2'>
                         <a href="">Forget Password?</a>
                         
                         {% if form.non_field_errors %}
-                            
                             {% for error in form.non_field_errors %}
                                 <p class="alert alert-danger my-3">{{error}}</p>
                             {% endfor %}
-                            
                         {% endif %}
                     </form>
                 </div>
@@ -52,5 +56,16 @@
         </div>
     </div>
 </div>
+
+<!-- JavaScript to toggle password visibility -->
+<script>
+    function togglePasswordVisibility() {
+        var passwordField = document.querySelector('input[name="password"]'); 
+        if (document.getElementById("showPassword").checked) {
+            passwordField.type = "text"; 
+        } else {
+            passwordField.type = "password"; 
+        }
+    }
+</script>
 {% endblock content %}
-    

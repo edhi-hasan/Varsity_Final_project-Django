@@ -1,0 +1,103 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .search-form {
+        display: flex;
+        flex-direction: column; /* Stack label and input group */
+        align-items: center; /* Center items horizontally */
+        margin: 10px; /* Add margin */
+    }
+    
+    .input-group {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc; /* Border for the entire input group */
+        border-radius: 5px; /* Rounded corners */
+        overflow: hidden; /* Prevent inner elements from exceeding the container */
+        width: 300px; /* Full width of the parent container */
+        max-width: 800px; /* Maximum width of the input group */
+    }
+    
+    .form-select {
+        padding: 10px; /* Add padding */
+        border: none; /* Remove default border */
+        outline: none; /* Remove outline */
+        flex: 1; /* Allow the select to take up available space */
+        font-size: 16px; /* Font size */
+        color: #333; /* Text color */
+        width: 100%; /* Full width */
+    }
+    
+    .btn-search {
+        background-color: red; /* Button color */
+        color: white; /* Text color */
+        border: none; /* Remove border */
+        padding: 10px 15px; /* Padding */
+        cursor: pointer; /* Pointer cursor */
+        font-size: 16px; /* Font size */
+        border-radius: 0 5px 5px 0; /* Rounded corners for the right side */
+    }
+    
+    .btn-search i {
+        font-size: 16px; /* Icon size */
+    }
+    
+    
+    .btn-search:hover {
+        background-color: black; 
+    }
+    
+    
+</style>
+
+
+<div class="donor_profile_sec">
+    <div class="col-10 text-center">
+        <h2 class="p-2 mb-4 bg-info text-dark">Donors Profile</h2>
+    </div>
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'All_Donors' %}" class="search-form">
+        <div class="input-group">
+            <select name="blood_group" id="blood_group" class="form-select">
+                <option value="">All Profile</option>
+                <option value="A+" {% if query == "A+" %}selected{% endif %}>A+</option>
+                <option value="A-" {% if query == "A-" %}selected{% endif %}>A-</option>
+                <option value="B+" {% if query == "B+" %}selected{% endif %}>B+</option>
+                <option value="B-" {% if query == "B-" %}selected{% endif %}>B-</option>
+                <option value="O+" {% if query == "O+" %}selected{% endif %}>O+</option>
+                <option value="O-" {% if query == "O-" %}selected{% endif %}>O-</option>
+                <option value="AB+" {% if query == "AB+" %}selected{% endif %}>AB+</option>
+                <option value="AB-" {% if query == "AB-" %}selected{% endif %}>AB-</option>
+            </select>
+            <button type="submit" class="btn-search">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    
+    
+    <div class="donor-profile mt-4">
+        {% for profile in posts %}
+        <div class="donor-parts">
+            <div class="donor-profile-card-modern">
+                <div class="card-header">
+                    {% if profile.profile_img %}
+                        <img src="{{ profile.profile_img.url }}" alt="Donor Image" class="donor-image">
+                    {% endif %}
+                    <h2>{{ profile.name }}</h2>
+                </div>
+                <div class="card-body">
+                    <p class="blood-group">Blood Group: {{ profile.blood_group }}</p>
+                    <p class="phone-number">Phone: {{ profile.phone_number }}</p>
+                    <p class="addresses">Address: {{ profile.address }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h5>No donor profiles found for this blood group.</h5>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

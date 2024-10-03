@@ -68,7 +68,7 @@
                     <p>There are no blood request posts available.</p>  <!-- Message if no posts -->
                 {% endfor %}
             </div>
-            <a href="all-post-request.html" class="seemore">See more...</a>
+            <a href="{% url 'allRepPost' %}" class="seemore">See more...</a>
         </div>
         
         
@@ -100,7 +100,7 @@
             {% endfor %}
         </div>
 
-        <a href="donors-profile.html" class="seemore">See more...</a>
+        <a href="{% url 'All_Donors' %}" class="seemore">See more...</a>
     </div>
 
 <!--------------- Quote Section ---------------->

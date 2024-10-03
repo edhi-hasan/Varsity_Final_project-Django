@@ -10,10 +10,10 @@
         </div>
         <div class="profile-info-unique">
             <h2 class="profile-name-unique">{{ profile.name }}</h2>
-            <p class="profile-blood-group-unique">Blood Group: {{ profile.blood_group }}</p>
-            <p class="profile-phone-unique">Phone: {{ profile.phone_number }}</p>
-            <p class="profile-phone-unique">Email: {{ profile.user.email }}</p>
-            <p class="profile-address-unique">Address: {{ profile.address }}</p>
+            <p class="profile-blood-group-unique"><b>Blood Group:</b> {{ profile.blood_group }}</p>
+            <p class="profile-phone-unique"><b>Phone:</b> {{ profile.phone_number }}</p>
+            <p class="profile-phone-unique"><b>Email:</b> {{ profile.user.email }}</p>
+            <p class="profile-address-unique"><b>Address:</b> {{ profile.address }}</p>
         </div>
         <div class="profile-actions-unique">
             <button class="btn-unique edit-btn-unique"><a href="{% url 'updateProfile' profile.id %}">Edit</a></button>

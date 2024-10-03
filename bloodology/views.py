@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect, get_object_or_404
 from . forms import RequestPostForm,UserRegistrationForm,userLogin
 from . models import BloodRequestPost, UserProfile
+from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -10,9 +11,26 @@ from . models import User
 # Create your views here.
 
 def home(request):
-    reqPost = BloodRequestPost.objects.all().order_by('-created_at')
+    reqPost = BloodRequestPost.objects.all().order_by('-created_at')[:9]
     userProfiles = UserProfile.objects.all() 
     return render(request, 'bloodology/home.html', {'posts': reqPost, 'profiles': userProfiles})
+
+
+#All Blood request POST
+def all_posts(request):
+    posts = BloodRequestPost.objects.all().order_by('-created_at') 
+    
+    return render(request, 'bloodology/all_blood_request_Post.html', {'posts': posts})
+
+#All Donors Profile
+def all_Donors(request):
+    query = request.GET.get('blood_group')  # Get the blood group from the search form
+    if query:
+        posts = UserProfile.objects.filter(blood_group=query)  # Filter by blood group
+    else:
+        posts = UserProfile.objects.all()  # Show all profiles if no query
+
+    return render(request, 'bloodology/allDonorProfile.html', {'posts': posts, 'query': query})
 
 #SignUP
 
@@ -38,14 +56,20 @@ def user_profile(request):
 
 #Blood Request Post
 def AddRequestForm(request):
+    # Delete expired posts
+    now = timezone.now()
+    expired_posts = BloodRequestPost.objects.filter(date_time__lt=now)
+    print(f"Expired Posts Count Before Deletion: {expired_posts.count()}")  # Debug line
+
+    expired_posts.delete()  # Delete expired posts
+    print(f"Expired Posts Deleted. Remaining Count: {BloodRequestPost.objects.count()}")  # Debug line
+
     form = RequestPostForm()  # Initialize the form at the start
     if request.method == "POST":
         form = RequestPostForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')  # Redirect after successful form submission
-        else:
-            form = RequestPostForm()
 
     return render(request, 'bloodology/AddRequestForm.html', {'form': form})
 
