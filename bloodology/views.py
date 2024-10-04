@@ -1,11 +1,14 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect, get_object_or_404
-from . forms import RequestPostForm,UserRegistrationForm,userLogin
+from . forms import RequestPostForm,UserRegistrationForm,userLogin,VerifyOTPForm,RequestPasswordResetForm
 from . models import BloodRequestPost, UserProfile
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from . models import User
+from django.core.mail import send_mail
+from .forms import RequestPasswordResetForm
+from django.contrib.auth.hashers import make_password
 
 
 # Create your views here.
@@ -55,20 +58,19 @@ def user_profile(request):
 
 #Blood Request Post
 def AddRequestForm(request):
-    # Delete expired posts
     now = timezone.now()
     expired_posts = BloodRequestPost.objects.filter(date_time__lt=now)
-    print(f"Expired Posts Count Before Deletion: {expired_posts.count()}")  # Debug line
+    print(f"Expired Posts Count Before Deletion: {expired_posts.count()}") 
 
-    expired_posts.delete()  # Delete expired posts
-    print(f"Expired Posts Deleted. Remaining Count: {BloodRequestPost.objects.count()}")  # Debug line
+    expired_posts.delete() 
+    print(f"Expired Posts Deleted. Remaining Count: {BloodRequestPost.objects.count()}") 
 
-    form = RequestPostForm()  # Initialize the form at the start
+    form = RequestPostForm()  
     if request.method == "POST":
         form = RequestPostForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')  # Redirect after successful form submission
+            return HttpResponseRedirect('/')  
 
     return render(request, 'bloodology/AddRequestForm.html', {'form': form})
 
@@ -85,13 +87,10 @@ def user_login(request):
                     login(request, user)
                     return redirect('home')
                 else:
-                    # Add a message for invalid login credentials
                     messages.error(request, 'Invalid username or password.')
             else:
-                # Add a message if the form is not valid
                 messages.error(request, "Invalid username or password.....")
 
-        # If the method is GET or POST fails, render the form again
         form = userLogin()
         return render(request, 'bloodology/login.html', {'form': form})
 
@@ -119,21 +118,21 @@ def deleteProfile(request, id):
 
 # <================== Update/Edit profile ====================> 
 def updateProfile(request, id):
-    user_instance = User.objects.get(pk=id)  # Get the user instance
-    user_profile = UserProfile.objects.get(user=user_instance)  # Get the associated UserProfile
+    user_instance = User.objects.get(pk=id)  
+    user_profile = UserProfile.objects.get(user=user_instance) 
 
     if request.method == "POST":
-        # Initialize the form with POST data and the user instance
+        
         fm = UserRegistrationForm(request.POST, request.FILES, instance=user_instance)
         if fm.is_valid():
-            user = fm.save(commit=False)  # Save user but don't commit yet
-            # Update UserProfile data
+            user = fm.save(commit=False)  
+            
             user_profile.name = fm.cleaned_data['name']
             user_profile.blood_group = fm.cleaned_data['blood_group']
             user_profile.phone_number = fm.cleaned_data['phone_number']
             user_profile.address = fm.cleaned_data['address']
             user_profile.profile_img = fm.cleaned_data.get('profile_img', user_profile.profile_img)  # Keep existing image if none is provided
-            user_profile.save()  # Save the UserProfile instance
+            user_profile.save()  
             user.save()  # Save the User instance
             return redirect('login')  # Redirect to home or a success page after saving
     else:
@@ -153,6 +152,68 @@ def updateProfile(request, id):
         # No need to set initial for profile_img as it should be handled in the form directly
 
     return render(request, 'bloodology/UpdateProfile.html', {'form': fm})
+
+
+# Reset Password
+def request_password_reset(request):
+    if request.method == "POST":
+        form = RequestPasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            try:
+                user = User.objects.get(email=email)
+                user_profile = user.userprofile
+                otp = user_profile.generate_otp()  # Generate and save OTP
+                # Send OTP to user's email
+                send_mail(
+                    'Password Reset OTP',
+                    f'Your OTP is {otp}. It will expire in 10 minutes.',
+                    'edhimahbub66@gmail.com',  # Replace with your email
+                    [user.email],
+                    fail_silently=False,
+                )
+                request.session['reset_user_id'] = user.id  # Store user ID in session for next step
+                return redirect('verify_otp')  # Redirect to OTP verification view
+            except User.DoesNotExist:
+                form.add_error('email', 'No account found with this email.')
+
+    else:
+        form = RequestPasswordResetForm()
+
+    return render(request, 'bloodology/request_pass_reset.html', {'form': form})
+
+
+
+def verify_otp(request):
+    if 'reset_user_id' not in request.session:
+        return redirect('request_password_reset')
+
+    user = User.objects.get(id=request.session['reset_user_id'])
+    user_profile = user.userprofile
+    if request.method == 'POST':
+        form = VerifyOTPForm(request.POST)
+        if form.is_valid():
+            otp = form.cleaned_data['otp']
+            new_password = form.cleaned_data['new_password']
+            confirm_password = form.cleaned_data['confirm_password']
+
+            if user_profile.otp == otp and timezone.now() < user_profile.otp_expiration:
+                if new_password == confirm_password:
+                    user.password = make_password(new_password)
+                    user.save()
+                    user_profile.otp = None  # Clear OTP after successful reset
+                    user_profile.save()
+                    del request.session['reset_user_id']  # Clear session after reset
+                    return redirect('login')  # Redirect to login page after successful password reset
+                else:
+                    form.add_error('confirm_password', 'Passwords do not match.')
+            else:
+                form.add_error('otp', 'Invalid or expired OTP.')
+
+    else:
+        form = VerifyOTPForm()
+
+    return render(request, 'bloodology/verify_otp.html', {'form': form})
 
 #User Logout
 def user_logout(request):

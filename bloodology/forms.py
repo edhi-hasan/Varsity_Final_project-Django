@@ -21,7 +21,7 @@ class RequestPostForm(forms.ModelForm):
             'blood_group': forms.Select(attrs={'class': 'form-control'}),
             'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
             'Disease_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'No_of_bag': forms.NumberInput(attrs={'class': 'form-control'}),
+            'No_of_bag': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Required no of bags'}),
             'medical_name': forms.TextInput(attrs={'class': 'form-control'}),
             'location': forms.TextInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'type': 'tel'})
@@ -80,3 +80,12 @@ class userLogin(AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'})
     )
+
+
+class RequestPasswordResetForm(forms.Form):
+    email = forms.EmailField(label="Enter your email", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+class VerifyOTPForm(forms.Form):
+    otp = forms.CharField(max_length=6, label="Enter OTP", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))

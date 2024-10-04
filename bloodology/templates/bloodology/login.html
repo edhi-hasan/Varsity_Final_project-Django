@@ -43,7 +43,7 @@
                         </div>
                         
                         <input type="submit" value="Login" class='btn btn-primary mt-2'>
-                        <a href="">Forget Password?</a>
+                        <a href="{% url 'request_password_reset' %}">Forget Password?</a>
                         
                         {% if form.non_field_errors %}
                             {% for error in form.non_field_errors %}

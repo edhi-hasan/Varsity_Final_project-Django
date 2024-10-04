@@ -10,7 +10,7 @@
 /*==============*/
 .navigation {
     height: 70px;
-    background-color: rgb(255, 6, 6);
+    background-color: rgb(231, 77, 77);
     
     display: flex;
     justify-content: space-between; /* Distribute space between the left and right sections */
@@ -96,7 +96,7 @@
 /******************** Container part *************************/
 
 .container1{
-    height: 530px;
+    height: 560px;
     display: flex;
     justify-content: space-evenly;
     background: linear-gradient(135deg, #e77777, #ffffff);
