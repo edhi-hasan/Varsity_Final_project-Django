@@ -89,3 +89,4 @@ class VerifyOTPForm(forms.Form):
     otp = forms.CharField(max_length=6, label="Enter OTP", widget=forms.TextInput(attrs={'class': 'form-control'}))
     new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+

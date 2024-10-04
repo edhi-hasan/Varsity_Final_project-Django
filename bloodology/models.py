@@ -46,3 +46,4 @@ class UserProfile(models.Model):
                 self.otp_expiration = timezone.now() + datetime.timedelta(minutes=10)  # Set expiration time for OTP
                 self.save()
                 return otp
+        

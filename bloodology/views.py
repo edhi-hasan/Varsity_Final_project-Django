@@ -34,8 +34,7 @@ def all_Donors(request):
 
     return render(request, 'bloodology/allDonorProfile.html', {'posts': posts, 'query': query})
 
-#SignUP
-
+#<============= SignUP ===============>
 def user_signUp(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST, request.FILES)
@@ -60,11 +59,9 @@ def user_profile(request):
 def AddRequestForm(request):
     now = timezone.now()
     expired_posts = BloodRequestPost.objects.filter(date_time__lt=now)
-    print(f"Expired Posts Count Before Deletion: {expired_posts.count()}") 
-
+    print(expired_posts)
     expired_posts.delete() 
-    print(f"Expired Posts Deleted. Remaining Count: {BloodRequestPost.objects.count()}") 
-
+    print()
     form = RequestPostForm()  
     if request.method == "POST":
         form = RequestPostForm(request.POST)
@@ -215,6 +212,8 @@ def verify_otp(request):
 
     return render(request, 'bloodology/verify_otp.html', {'form': form})
 
+
+
 #User Logout
 def user_logout(request):
     logout(request)
@@ -238,3 +237,4 @@ def CompatibleBloodDonors(request):
 #About Us
 def AboutUs(request):
     return render(request,'bloodology/AboutUs.html')
+
