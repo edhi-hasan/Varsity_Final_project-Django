@@ -1,0 +1,14 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="blog-form-container">
+    <div class="blog-form-card">
+        <h1>Create a New Blog Post</h1>
+        <form action="" method="POST"> {% csrf_token %}
+            {{form}}
+            <button type="submit" class='btn btn-info'>Post Blog</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

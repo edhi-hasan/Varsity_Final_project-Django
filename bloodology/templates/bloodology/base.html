@@ -23,7 +23,7 @@
     
         <div class="nav-right">
             <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i> Home</a>
-            
+            <a href="{% url 'blogapost' %}">Blog</a>
             <a href="{% url 'All_Donors' %}"><i class="fa-solid fa-search"></i> Search Donor</a>
             {% if request.user.is_authenticated %}
                 <div class="user-dropdown">
@@ -39,6 +39,7 @@
                     <div class="dropdown-content">
                         <a href="{% url 'addRequest' %}">Add Blood Request</a>
                         <a href="{% url 'profile' %}">Profile</a>
+                        <a href="{% url 'blogapostform' %}">Post Blog</a>
                         <a href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> LogOut</a>
                     </div>
                 </div>

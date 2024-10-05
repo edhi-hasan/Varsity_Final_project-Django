@@ -1,13 +1,12 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect, get_object_or_404
-from . forms import RequestPostForm,UserRegistrationForm,userLogin,VerifyOTPForm,RequestPasswordResetForm
-from . models import BloodRequestPost, UserProfile
+from . forms import RequestPostForm,UserRegistrationForm,userLogin,VerifyOTPForm,RequestPasswordResetForm,blogPostform
+from . models import BloodRequestPost, UserProfile,BlogPost
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from . models import User
 from django.core.mail import send_mail
-from .forms import RequestPasswordResetForm
 from django.contrib.auth.hashers import make_password
 
 
@@ -55,21 +54,39 @@ def user_profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
     return render(request, 'bloodology/user_profile.html',{'profile': profile})
 
-#Blood Request Post
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.utils import timezone
+from .models import BloodRequestPost
+from .forms import RequestPostForm
+from django.contrib.auth.decorators import login_required
+
+# Blood Request Post
+@login_required
 def AddRequestForm(request):
     now = timezone.now()
+
+    # Delete expired posts where the request time is in the past
     expired_posts = BloodRequestPost.objects.filter(date_time__lt=now)
-    print(expired_posts)
-    expired_posts.delete() 
-    print()
-    form = RequestPostForm()  
+    expired_posts.delete()
+
+    # Instantiate the form
+    form = RequestPostForm()
+
     if request.method == "POST":
         form = RequestPostForm(request.POST)
+
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')  
+            # Do not call form.save() directly as we need to set user_profile first
+            blood_request_post = form.save(commit=False)  # Create an instance but don't save yet
+            # Get the logged-in user's profile
+            blood_request_post.user_profile = request.user.userprofile
+            blood_request_post.save()  # Now save the post with the user_profile
+
+            return HttpResponseRedirect('/')  # Redirect after successful post submission
 
     return render(request, 'bloodology/AddRequestForm.html', {'form': form})
+
 
 # Login
 def user_login(request):
@@ -238,3 +255,21 @@ def CompatibleBloodDonors(request):
 def AboutUs(request):
     return render(request,'bloodology/AboutUs.html')
 
+#blog post
+def blog_post(request):
+    blog_posts = BlogPost.objects.all().select_related('user_profile').order_by('-blogPostTime')
+    return render(request, 'bloodology/blog_list.html', {'blog_posts': blog_posts})
+
+@login_required  # Ensure only logged-in users can access this view
+def blogPostFormview(request):
+    if request.method == "POST":
+        form = blogPostform(request.POST)  # Instantiate form with POST data
+        if form.is_valid():  # Check if the form is valid
+            blog_post = form.save(commit=False)  # Create a blog post instance without saving it yet
+            blog_post.user_profile = request.user.userprofile  # Associate the logged-in user's profile
+            blog_post.save()  # Now save the instance
+            return redirect('blogapost')  # Redirect to the blog list or another appropriate view
+    else:
+        form = blogPostform()  # Create an empty form for GET requests
+
+    return render(request, 'bloodology/blogPostForm.html', {'form': form})

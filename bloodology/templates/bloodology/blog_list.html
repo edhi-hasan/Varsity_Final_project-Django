@@ -1,0 +1,27 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="blogcontainer">
+    <h1>Health Blog</h1>
+
+    
+    {% for post in blog_posts %}
+        <div class="blog-post">
+            <div class="bloguser-info">
+                <img src="{{ post.user_profile.profile_img.url }}" alt="User Name" class="blogprofile-pic"> <!-- Replace with actual image source -->
+                <div class="bloguser-details">
+                    <h4>{{ post.user_profile.name }}</h4>
+                    <h6>Posted on: {{ post.blogPostTime }}</h6> <!-- Replace with actual user name -->
+                </div>
+            </div>
+            <h2 class="blog-title">{{ post.title }}</h2> <!-- Replace with actual blog title -->
+            <p class="blog-description">
+                {{ post.content }}
+            </p>
+        </div>
+    {% endfor %}
+        
+
+</div>
+{% endblock content %}

@@ -21,6 +21,8 @@ urlpatterns = [
     path('About',views.AboutUs, name="About"),
     path('password_reset/', views.request_password_reset, name='request_password_reset'),
     path('verify_otp/', views.verify_otp, name='verify_otp'),
+    path('blogapost', views.blog_post, name='blogapost'),
+    path('blogapostform', views.blogPostFormview, name='blogapostform'),
 
 
 ]

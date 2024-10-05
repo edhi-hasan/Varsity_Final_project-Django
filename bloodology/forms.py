@@ -1,5 +1,5 @@
 from django import forms 
-from .models import BloodRequestPost, UserProfile
+from .models import BloodRequestPost, UserProfile,BlogPost
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm , UsernameField 
 from django.contrib.auth.models import User
 from django.utils.translation import gettext,gettext_lazy as _
@@ -90,3 +90,15 @@ class VerifyOTPForm(forms.Form):
     new_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+class blogPostform(forms.ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = ['title', 'content']
+        labels = {
+            'title': 'Title',
+            'content': 'Content',
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'blog-form-group', 'placeholder': 'Enter your blog title'}),
+            'content': forms.Textarea(attrs={'class': 'blog-form-group', 'placeholder': 'Write your blog content here...'}),
+        }

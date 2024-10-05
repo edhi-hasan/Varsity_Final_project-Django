@@ -4,27 +4,6 @@ from django.utils import timezone
 import datetime,random
 
 # Create your models here.
-class BloodRequestPost(models.Model):
-        BLOOD_GROUP_CHOICES = [
-                ('A+', 'A+'),
-                ('A-', 'A-'),
-                ('B+', 'B+'),
-                ('B-', 'B-'),
-                ('O+', 'O+'),
-                ('O-', 'O-'),
-                ('AB+', 'AB+'),
-                ('AB-', 'AB-'),
-        ]
-
-        blood_group = models.CharField(max_length=10, choices=BLOOD_GROUP_CHOICES)
-        date_time = models.DateTimeField()
-        Disease_name = models.CharField(max_length=100)
-        No_of_bag = models.IntegerField()
-        medical_name = models.CharField( max_length=150)
-        location = models.CharField(max_length=255)
-        phone_number = models.CharField(max_length=15)
-        created_at = models.DateTimeField(auto_now_add=True)
-
 
 class UserProfile(models.Model):
         user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -47,3 +26,33 @@ class UserProfile(models.Model):
                 self.save()
                 return otp
         
+class BlogPost(models.Model):
+        user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+        title = models.CharField(max_length=200)
+        content = models.TextField()
+        blogPostTime = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+                return self.title
+        
+
+class BloodRequestPost(models.Model):
+        BLOOD_GROUP_CHOICES = [
+                ('A+', 'A+'),
+                ('A-', 'A-'),
+                ('B+', 'B+'),
+                ('B-', 'B-'),
+                ('O+', 'O+'),
+                ('O-', 'O-'),
+                ('AB+', 'AB+'),
+                ('AB-', 'AB-'),
+        ]
+        user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+        blood_group = models.CharField(max_length=10, choices=BLOOD_GROUP_CHOICES)
+        date_time = models.DateTimeField()
+        Disease_name = models.CharField(max_length=100)
+        No_of_bag = models.IntegerField()
+        medical_name = models.CharField( max_length=150)
+        location = models.CharField(max_length=255)
+        phone_number = models.CharField(max_length=15)
+        created_at = models.DateTimeField(auto_now_add=True)

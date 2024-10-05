@@ -71,7 +71,7 @@
 .dropdown-content {
     display: none; /* Initially hidden */
     position: absolute; /* Positioned below the user profile link */
-    background-color: rgb(241, 23, 23); /* Match navbar background */
+    background-color: rgb(231, 77, 77); /* Match navbar background */
     min-width: 160px; /* Set a width for the dropdown */
     z-index: 1; /* Ensure it appears above other content */
 }
@@ -148,14 +148,38 @@
 .request-post h2 {
     color: red;
 }
+/* ---------- */
+.post-user-info {
+    display: flex;
+    align-items: center;  /* Vertically center the items */
+}
 
+.post-user-info p {
+    margin: 0 10px;  /* Add some space between the text elements */
+}
+.post-user-info h4{
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    color: red;
+}
+.dp {
+    width: 25px;  /* Adjust width for the profile picture */
+    height: 25px;
+    object-fit: cover;  /* Ensure the image retains aspect ratio and fits in the circle */
+    margin-left: 10px;  /* Add space between image and text */
+    border-radius: 50%;
+}
 .request-post a {
     text-decoration: none;
     font-weight: 550;
     color: black;
 }
 .all-post {
-    margin: 20px;  /* Center the container */
+    display: flex;
+    align-items: center;
+    margin: 10px;  /* Center the container */
 }
 
 .post-page {
@@ -169,22 +193,16 @@
     margin-left: 10px;
 }
 
-.blood-request-card-alt_p {
-    border: 1px solid #ccc; /* Optional: Add border for better visibility */
-    border-radius: 10px; /* Optional: Add border radius */
 
-}
 
 .update_time{
     font-size: 12px;
     margin-top: 5px;
-    margin-left: 5px;
     text-align: left;
 }
 
 .blood-request-card-alt_p {
-    width: 350px;
-    max-width: 400px;
+    width: 320px;
     border-radius: 15px;
     overflow: hidden;
     background: linear-gradient(135deg, #e4d9d9, #ffffff);
@@ -800,3 +818,115 @@
 }
 
 
+/* <=============blog post===============>  */
+
+.blogcontainer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #eedada;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blogcontainer h1 {
+    text-align: center;
+    color: #f80000;
+    font-weight: bold;
+}
+
+.blog-post {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.bloguser-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+
+.blogprofile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* 50% radius for circular image */
+    margin-right: 15px;
+}
+.bloguser-details{
+    line-height: 0.01cm;
+    margin-top: 10px;
+}
+.bloguser-details h4 {
+    margin-bottom: -8px;
+    color: #ff1100; /* Blue color for user name */
+    font-weight: bold;
+}
+.bloguser-details h6{
+    margin-top: 8px;
+    font-size: 10px;
+}
+
+.blog-title {
+    color: #333;
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.blog-description {
+    color: #555;
+    font-size: 1em;
+}
+
+/* <=============blog post form ======================>  */
+
+.blog-form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgb(235, 221, 221);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.blog-form-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f10e0e;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.blog-form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #383636;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
+button:hover {
+    background-color: #0056b3;
+}
