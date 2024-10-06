@@ -99,6 +99,6 @@ class blogPostform(forms.ModelForm):
             'content': 'Content',
         }
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'blog-form-group', 'placeholder': 'Enter your blog title'}),
-            'content': forms.Textarea(attrs={'class': 'blog-form-group', 'placeholder': 'Write your blog content here...'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your blog title'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Write your blog content here...'}),
         }

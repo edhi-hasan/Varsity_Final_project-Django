@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block content %}
-<div class="blogPostform ">
-    <div class="blogPostformcard">
-        <h1>Create a New Blog Post</h1>
+<div class="blogPostform">
+    <div class="editBlogPostform">
+        <h1>Edit Blog Post</h1>
         <form action="" method="POST"> {% csrf_token %}
             {{form}}
-            <button type="submit" class='btn btn-info mt-2'>Post Blog</button>
+            <button type="submit" class="btn btn-primary mt-2">Update Post</button>
         </form>
     </div>
 </div>
 {% endblock content %}
+

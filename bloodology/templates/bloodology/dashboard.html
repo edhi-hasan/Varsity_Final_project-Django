@@ -1,0 +1,65 @@
+{% extends 'bloodology/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+    .editb{
+        margin-right:5px;
+    }
+    .editb a{
+        text-decoration:none;
+        color:white;
+    }
+</style>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}">My Blog</a></li>
+                    <li><a href="{% url 'blogapostform' %}">Add new blog</a></li>
+                    <li><a href="{% url 'dashbloodReq' %}">Bloodrequest Posts</a></li>
+                    <li><a href="{% url 'addRequest' %}">Add new Blood Request</a></li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="blogcontainer col-sm-11">
+            <h1>Health Blog</h1>
+            {% for post in posts %}
+                <div class="blog-post">
+                    <div class="bloguser-info">
+                        <img src="{{ post.user_profile.profile_img.url }}" alt="User Name" class="blogprofile-pic"> <!-- Replace with actual image source -->
+                        <div class="bloguser-details">
+                            <h4>{{ post.user_profile.name }}</h4>
+                            <h6>Posted on: {{ post.blogPostTime }}</h6> <!-- Replace with actual user name -->
+                        </div>
+                    </div>
+                    <h2 class="blog-title">{{ post.title }}</h2> <!-- Replace with actual blog title -->
+                    <p class="blog-description">
+                        {{ post.content }}
+                    </p>
+                    <div class="d-flex justify-content-start bt">
+                        <button class="btn btn-success editb"><a href="{% url 'updateBlogPost' post.id %}">Edit</a></button>
+                        <form action="{% url 'deleteBlogPost' post.id %}" method="POST"> {% csrf_token %}
+                            <button type="submit" class='btn btn-danger'>Delete</button>
+                        </form>
+                    </div>
+                </div>
+            {% empty %}
+                <p>There are no blog posts available.</p>  <!-- Message if no posts -->
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+{% endblock content %}
+
+
+
+
+
+
+

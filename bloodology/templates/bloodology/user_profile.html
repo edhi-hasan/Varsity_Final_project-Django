@@ -16,7 +16,7 @@
             <p class="profile-address-unique"><b>Address:</b> {{ profile.address }}</p>
         </div>
         <div class="profile-actions-unique">
-            <button class="btn-unique edit-btn-unique"><a href="{% url 'updateProfile' profile.id %}">Edit</a></button>
+            <button class="btn-unique edit-btn-unique"><a href="{% url 'updateProfile' user.id %}">Edit</a></button>
             <!-- Added onclick to trigger the confirmation dialog -->
             <button class="btn-unique delete-btn-unique" onclick="showConfirmation()">Delete</button>
         </div>

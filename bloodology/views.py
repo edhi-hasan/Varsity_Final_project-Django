@@ -54,40 +54,36 @@ def user_profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
     return render(request, 'bloodology/user_profile.html',{'profile': profile})
 
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from django.utils import timezone
-from .models import BloodRequestPost
-from .forms import RequestPostForm
-from django.contrib.auth.decorators import login_required
 
 # Blood Request Post
 @login_required
 def AddRequestForm(request):
     now = timezone.now()
-
-    # Delete expired posts where the request time is in the past
     expired_posts = BloodRequestPost.objects.filter(date_time__lt=now)
     expired_posts.delete()
-
-    # Instantiate the form
     form = RequestPostForm()
-
     if request.method == "POST":
         form = RequestPostForm(request.POST)
-
         if form.is_valid():
-            # Do not call form.save() directly as we need to set user_profile first
-            blood_request_post = form.save(commit=False)  # Create an instance but don't save yet
-            # Get the logged-in user's profile
+            blood_request_post = form.save(commit=False) 
             blood_request_post.user_profile = request.user.userprofile
-            blood_request_post.save()  # Now save the post with the user_profile
-
-            return HttpResponseRedirect('/')  # Redirect after successful post submission
+            blood_request_post.save()  
+            return HttpResponseRedirect('/')  
 
     return render(request, 'bloodology/AddRequestForm.html', {'form': form})
 
+@login_required
+def edit_blood_request(request, post_id):
+    blood_request_post = get_object_or_404(BloodRequestPost, id=post_id, user_profile=request.user.userprofile)
+    if request.method == "POST":
+        form = RequestPostForm(request.POST, instance=blood_request_post)
+        if form.is_valid():
+            form.save()
+            return redirect('dashbloodReq')  # Adjust this to your actual dashboard view
+    else:
+        form = RequestPostForm(instance=blood_request_post)
 
+    return render(request, 'bloodology/edit_blood_request.html', {'form': form})
 # Login
 def user_login(request):
     if not request.user.is_authenticated:
@@ -132,25 +128,37 @@ def deleteProfile(request, id):
 
 # <================== Update/Edit profile ====================> 
 def updateProfile(request, id):
-    user_instance = User.objects.get(pk=id)  
-    user_profile = UserProfile.objects.get(user=user_instance) 
+    # Get the user instance or return a 404 if it doesn't exist
+    user_instance = get_object_or_404(User, pk=id)
+    
+    # Get the user profile or return a 404 if it doesn't exist
+    user_profile = get_object_or_404(UserProfile, user=user_instance)
 
-    if request.method == "POST":
-        
+    if request.method == "POST":    
+        # Bind the form with POST data and files, instance of the user
         fm = UserRegistrationForm(request.POST, request.FILES, instance=user_instance)
+        
         if fm.is_valid():
-            user = fm.save(commit=False)  
+            user = fm.save(commit=False)  # Save user instance without committing to the database yet
             
+            # Update profile fields from the form data
             user_profile.name = fm.cleaned_data['name']
             user_profile.blood_group = fm.cleaned_data['blood_group']
             user_profile.phone_number = fm.cleaned_data['phone_number']
             user_profile.address = fm.cleaned_data['address']
-            user_profile.profile_img = fm.cleaned_data.get('profile_img', user_profile.profile_img)  # Keep existing image if none is provided
-            user_profile.save()  
-            user.save()  # Save the User instance
-            return redirect('login')  # Redirect to home or a success page after saving
+            
+            # Only update the profile image if a new one was uploaded
+            profile_img = fm.cleaned_data.get('profile_img')
+            if profile_img:
+                user_profile.profile_img = profile_img
+
+            user_profile.save()  # Save the updated profile data
+            user.save()  # Save the updated user data
+            
+            return redirect('login')  # Redirect to login after successful update
+
     else:
-        # On GET request, load the data into the form
+        # Populate the form with initial data from both user and profile
         initial_data = {
             'name': user_profile.name,
             'blood_group': user_profile.blood_group,
@@ -158,12 +166,14 @@ def updateProfile(request, id):
             'address': user_profile.address,
             'profile_img': user_profile.profile_img,
         }
+        
         fm = UserRegistrationForm(instance=user_instance)
+        
+        # Set initial data for profile fields manually
         fm.fields['name'].initial = initial_data['name']
         fm.fields['blood_group'].initial = initial_data['blood_group']
         fm.fields['phone_number'].initial = initial_data['phone_number']
         fm.fields['address'].initial = initial_data['address']
-        # No need to set initial for profile_img as it should be handled in the form directly
 
     return render(request, 'bloodology/UpdateProfile.html', {'form': fm})
 
@@ -193,7 +203,6 @@ def request_password_reset(request):
 
     else:
         form = RequestPasswordResetForm()
-
     return render(request, 'bloodology/request_pass_reset.html', {'form': form})
 
 
@@ -260,16 +269,48 @@ def blog_post(request):
     blog_posts = BlogPost.objects.all().select_related('user_profile').order_by('-blogPostTime')
     return render(request, 'bloodology/blog_list.html', {'blog_posts': blog_posts})
 
-@login_required  # Ensure only logged-in users can access this view
+@login_required  
 def blogPostFormview(request):
     if request.method == "POST":
-        form = blogPostform(request.POST)  # Instantiate form with POST data
-        if form.is_valid():  # Check if the form is valid
-            blog_post = form.save(commit=False)  # Create a blog post instance without saving it yet
-            blog_post.user_profile = request.user.userprofile  # Associate the logged-in user's profile
-            blog_post.save()  # Now save the instance
-            return redirect('blogapost')  # Redirect to the blog list or another appropriate view
+        form = blogPostform(request.POST)  
+        if form.is_valid():  
+            blog_post = form.save(commit=False) 
+            blog_post.user_profile = request.user.userprofile  
+            blog_post.save()  
+            return redirect('blogapost')  
     else:
-        form = blogPostform()  # Create an empty form for GET requests
+        form = blogPostform() 
 
     return render(request, 'bloodology/blogPostForm.html', {'form': form})
+
+def dashboard(request):
+    posts = BlogPost.objects.filter(user_profile=request.user.userprofile).order_by('-blogPostTime')
+    return render(request,'bloodology/dashboard.html',{'posts': posts})
+
+
+
+@login_required
+def dash_blood_requests(request):
+    requests = BloodRequestPost.objects.filter(user_profile=request.user.userprofile)
+    return render(request, 'bloodology/dashBloodRequest.html', {'requests': requests})
+
+@login_required
+def edit_blog_post(request, id):
+    blog_post = get_object_or_404(BlogPost, id=id, user_profile=request.user.userprofile)
+    if request.method == "POST":
+        form = blogPostform(request.POST, instance=blog_post)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = blogPostform(instance=blog_post)
+    
+    return render(request, 'bloodology/edit_blog_post.html', {'form': form, 'blog_post': blog_post})
+
+def delete_blog_post(request, id):
+    blog_post = get_object_or_404(BlogPost, id=id, user_profile=request.user.userprofile)
+    if request.method == "POST":
+        blog_post.delete()
+        return redirect('dashboard')
+    
+    return render(request, 'bloodology/dashboard.html', {'blog_post': blog_post})

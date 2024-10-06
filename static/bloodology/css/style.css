@@ -365,7 +365,7 @@
 .blood-group,
 .phone-number,
 .addresses
- {
+{
     font-size: 1em;
     color: #1b1a1a;
     font-family: 'Times New Roman', Times, serif;
@@ -883,8 +883,8 @@
 
 /* <=============blog post form ======================>  */
 
-.blog-form-container {
-    max-width: 600px;
+.blogPostform {
+    max-width: 900px;
     margin: 50px auto;
     padding: 20px;
     background: rgb(235, 221, 221);
@@ -892,7 +892,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.blog-form-container h1 {
+.blogPostform h1 {
     text-align: center;
     margin-bottom: 20px;
     color: #f10e0e;
@@ -900,17 +900,13 @@
     font-weight: bold;
 }
 
-.blog-form-group {
-    margin-bottom: 15px;
-}
-
-label {
+.blogPostformcard label {
     display: block;
     margin-bottom: 5px;
     color: #383636;
 }
 
-input[type="text"],
+.blogPostformcard input[type="text"],
 textarea {
     width: 100%;
     padding: 12px;
@@ -920,13 +916,57 @@ textarea {
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus,
+.blogPostformcard input[type="text"]:focus,
 textarea:focus {
     border-color: #007bff;
     outline: none;
 }
 
 
-button:hover {
+.blogPostformcard button:hover {
     background-color: #0056b3;
+}
+
+
+/* <========================== Dashboard ===========================> */
+.dashboard {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    background-color: #ec1a1a;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar nav ul li a:hover {
+    text-decoration: underline;
 }
