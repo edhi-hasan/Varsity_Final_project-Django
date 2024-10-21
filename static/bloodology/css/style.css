@@ -189,7 +189,7 @@
     padding: 20px; /* Optional padding */
     box-sizing: border-box; /* Include padding in height calculations */
     color: rgb(7, 7, 7);
-    
+    background: linear-gradient(135deg, #f1eded, #ec847d);
     
     
 }
