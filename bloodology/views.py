@@ -291,7 +291,7 @@ def dashboard(request):
 
 @login_required
 def dash_blood_requests(request):
-    requests = BloodRequestPost.objects.filter(user_profile=request.user.userprofile)
+    requests = BloodRequestPost.objects.filter(user_profile=request.user.userprofile).order_by('-created_at')
     return render(request, 'bloodology/dashBloodRequest.html', {'requests': requests})
 
 @login_required

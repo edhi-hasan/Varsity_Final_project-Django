@@ -3,47 +3,9 @@
 
 {% block content %}
 <style>
-    .row{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .blood-request-card-alt_p {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 15px;
-        height: 100%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-
-    }
-    .card-header_p h2{
-        color:red;
-    }
-
-    .post-page {
-        margin-bottom: 20px;
-    }
-
-    .post-user-info {
-        font-size: 0.9rem; /* Smaller font for post info */
-    }
-    .bltime{
-        margin-left:23px;
-        font-size:12px;
-    }
-    button{
-        margin-left:20px;
-    }
-    /* Responsive design adjustments */
-    @media (max-width: 768px) {
-        .post-page {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-    }
+.btn{
+    margin-left:15px;
+}
 </style>
 <body>
     <div class="dashboard">
@@ -53,7 +15,7 @@
                 <ul>
                     <li><a href="{% url 'dashboard' %}">My Blog</a></li>
                     <li><a href="{% url 'blogapostform' %}">Add new blog</a></li>
-                    <li><a href="{% url 'dashbloodReq' %}">Bloodrequest Posts</a></li>
+                    <li><a href="{% url 'dashbloodReq' %}">Blood Request Posts</a></li>
                     <li><a href="{% url 'addRequest' %}">Add new Blood Request</a></li>
                     <li><a href="{% url 'profile' %}">Profile</a></li>
                 </ul>
@@ -63,26 +25,31 @@
             <h1>Blood Request Post</h1>
             <div class="row">
                 {% for post in requests %}
-                <div class="post-page col-md-5 mb-3">  <!-- Change col-md-4 to col-md-6 -->
+                <div class="post-page col-lg-4 col-md-6 col-sm-8 col-10 mb-4 d-flex justify-content-center"> <!-- Responsive columns and center posts -->
                     <div class="blood-request-card-alt_p">
                         <div class="card-header_p">
                             <h2 class="blood-group">{{ post.blood_group }}</h2>
                             <p class="date-time">{{ post.date_time }}</p>
                         </div>
                         <div class="card-body_p">
-                            <p class="disease-name" style='font: bold;'>Disease: {{ post.Disease_name }}</p>
+                            <p class="disease-name">Disease: {{ post.Disease_name }}</p>
                             <p class="number-of-bags">Bags Needed: {{ post.No_of_bag }}</p>
                             <p class="location">Medical: {{ post.medical_name }}</p>
                             <p class="location">Location: {{ post.location }}</p>
                             <p class="phone-number">Phone: {{ post.phone_number }}</p>
                         </div>
-                        <a href="{% url 'updateaddRequest' post.id %}"><button type="submit" class='btn btn-success'>Edit</button></a>
+                        <a href="{% url 'updateaddRequest' post.id %}" class="edit-btn">
+                            <button type="submit" class='btn btn-success'>Edit</button>
+                        </a>
+                        <div class="post-user-info">
+                            <p class="create_at">Post at: {{ post.created_at }}</p>
+                        </div>
                     </div>
-                    <p class="bltime">Postet on: {{post.created_at}}</p>
                 </div>
+                
                 {% empty %}
                 <p>There are no blood request posts available.</p>
-            {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>

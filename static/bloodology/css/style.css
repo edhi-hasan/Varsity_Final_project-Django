@@ -320,7 +320,7 @@
 
 .blood-request-card-alt_p {
     width: 100%; /* Full width of the column */
-    max-width: 350px; /* Limit maximum width */
+    max-width: 400px; /* Limit maximum width */
     border-radius: 15px;
     overflow: hidden;
     background: linear-gradient(135deg, #f1eded, #ec847d);
@@ -1120,4 +1120,78 @@ textarea:focus {
 
 .sidebar nav ul li a:hover {
     text-decoration: underline;
+}
+
+.blogcontainer {
+    flex-grow: 1; /* Allows the container to grow */
+    padding: 20px;
+}
+
+.blog-post {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.bloguser-info {
+    display: flex;
+    align-items: center;
+}
+
+.blogprofile-pic {
+    width: 50px; /* Fixed size for the profile picture */
+    height: 50px; /* Fixed size for the profile picture */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px; /* Space between the image and the text */
+}
+
+.btn {
+    margin-right: 10px; /* Space between buttons */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column; /* Stack sidebar and content vertically */
+        max-width: 100%; /* Full width on small screens */
+    }
+
+    .sidebar {
+        width: 100%; /* Full width for sidebar */
+        border-radius: 8px 8px 0 0; /* Rounded corners only on top */
+    }
+
+    .blogcontainer {
+        width: 100%; /* Full width for blog container */
+        padding: 10px; /* Less padding for mobile */
+    }
+
+    .blog-post {
+        margin-bottom: 15px; /* Adjust margin for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 15px; /* Less padding on very small screens */
+    }
+
+    .bloguser-info {
+        flex-direction: column; /* Stack user info vertically */
+        align-items: flex-start; /* Align left */
+    }
+
+    .blogprofile-pic {
+        width: 40px; /* Smaller profile picture */
+        height: 40px; /* Smaller profile picture */
+    }
+
+    .bloguser-details h4 {
+        margin: 0; /* Remove margin for a tighter layout */
+    }
+
+    .bloguser-details h6 {
+        margin: 5px 0 0 0; /* Space above the date */
+    }
 }
