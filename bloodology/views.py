@@ -25,11 +25,11 @@ def all_posts(request):
 
 #All Donors Profile
 def all_Donors(request):
-    query = request.GET.get('blood_group')  # Get the blood group from the search form
+    query = request.GET.get('blood_group')  
     if query:
-        posts = UserProfile.objects.filter(blood_group=query)  # Filter by blood group
+        posts = UserProfile.objects.filter(blood_group=query)  
     else:
-        posts = UserProfile.objects.all()  # Show all profiles if no query
+        posts = UserProfile.objects.all()  
 
     return render(request, 'bloodology/allDonorProfile.html', {'posts': posts, 'query': query})
 
@@ -40,9 +40,9 @@ def user_signUp(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your account has been created! You can now log in.')
-            return redirect('login')  # Redirect to the login page if the form is valid
+            return redirect('login') 
     else:
-        form = UserRegistrationForm()  # Initialize the form for GET requests
+        form = UserRegistrationForm()  
 
     return render(request, 'bloodology/signUp.html', {'form': form})
 
@@ -79,7 +79,7 @@ def edit_blood_request(request, post_id):
         form = RequestPostForm(request.POST, instance=blood_request_post)
         if form.is_valid():
             form.save()
-            return redirect('dashbloodReq')  # Adjust this to your actual dashboard view
+            return redirect('dashbloodReq')  
     else:
         form = RequestPostForm(instance=blood_request_post)
 
@@ -139,7 +139,7 @@ def updateProfile(request, id):
         fm = UserRegistrationForm(request.POST, request.FILES, instance=user_instance)
         
         if fm.is_valid():
-            user = fm.save(commit=False)  # Save user instance without committing to the database yet
+            user = fm.save(commit=False) 
             
             # Update profile fields from the form data
             user_profile.name = fm.cleaned_data['name']
@@ -152,10 +152,10 @@ def updateProfile(request, id):
             if profile_img:
                 user_profile.profile_img = profile_img
 
-            user_profile.save()  # Save the updated profile data
-            user.save()  # Save the updated user data
+            user_profile.save()  
+            user.save()  
             
-            return redirect('login')  # Redirect to login after successful update
+            return redirect('login')  
 
     else:
         # Populate the form with initial data from both user and profile
@@ -191,7 +191,7 @@ def request_password_reset(request):
                 # Send OTP to user's email
                 send_mail(
                     'Password Reset OTP',
-                    f'Your OTP is {otp}. It will expire in 10 minutes.',
+                    f'Your OTP is {otp}. It will expire in 5 minutes.',
                     'edhimahbub66@gmail.com',  # Replace with your email
                     [user.email],
                     fail_silently=False,

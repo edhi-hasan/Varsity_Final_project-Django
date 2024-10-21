@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('',views.home,name='home'),
     path('addRequest',views.AddRequestForm,name='addRequest'),
-     path('updateaddRequest/<int:post_id>/', views.edit_blood_request, name='updateaddRequest'),
+    path('updateaddRequest/<int:post_id>/', views.edit_blood_request, name='updateaddRequest'),
     path('allRepPost',views.all_posts,name='allRepPost'),
     path('signUp',views.user_signUp,name='signUp'),
     path('login',views.user_login,name='login'),

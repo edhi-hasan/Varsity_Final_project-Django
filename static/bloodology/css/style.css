@@ -8,53 +8,56 @@
 
 
 /*==============*/
+/* Main navigation bar styling */
 .navigation {
     height: 70px;
     background-color: rgb(231, 77, 77);
-    
     display: flex;
-    justify-content: space-between; /* Distribute space between the left and right sections */
+    justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* Optional padding for better spacing */
+    padding: 0 20px;
+    position: relative;
 }
 
+/* Flex container for the left and right sections of the nav */
 .nav-left,
 .nav-right {
     display: flex;
     align-items: center;
 }
 
+/* Styling for the logo */
 .nav-logo {
     height: 65px;
     width: 120px;
-    margin-right: 20px; /* Adds some spacing between the logo and the next nav item */
+    margin-right: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-left: 10px;
 }
-.nav-logo a{
-    font-size: 1.5rem;
+
+/* Logo anchor styling */
+.nav-logo a {
+    font-size: 1.9rem;
     font-weight: 50px;
+    color: white;
 }
 
-.logo {
-    background-image: url('../image/blood.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 65px;
-    width: 120px;
-}
-
+/* Main navigation links */
 .navigation a {
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-weight: 550;
-    margin-left: 15px; /* Adds some spacing between the links */
+    margin-left: 15px;
 }
 
+/* Specific right-side nav link margin */
 .nav-right a {
-    margin-left: 25px; /* More spacing between the right-side links */
+    margin-left: 25px;
 }
+
+/* Profile image styling */
 .dprofile-img {
     width: 40px;
     height: 40px;
@@ -64,74 +67,229 @@
     vertical-align: middle;
 }
 
+/* Dropdown menu styling */
 .user-dropdown {
-    position: relative; /* Positioning for the dropdown */
+    position: relative;
 }
 
+/* Dropdown content styling */
 .dropdown-content {
-    display: none; /* Initially hidden */
-    position: absolute; /* Positioned below the user profile link */
-    background-color: rgb(231, 77, 77); /* Match navbar background */
-    min-width: 160px; /* Set a width for the dropdown */
-    z-index: 1; /* Ensure it appears above other content */
+    display: none;
+    position: absolute;
+    background-color: rgb(231, 77, 77);
+    min-width: 160px;
+    z-index: 1;
 }
 
 .user-dropdown.active .dropdown-content {
-    display: block; /* Show dropdown when parent is active */
+    display: block;
 }
 
+/* Dropdown links */
 .dropdown-content a {
-    color: rgb(248, 244, 244); /* Link color */
-    padding: 12px 16px; /* Spacing for links */
-    text-decoration: none; /* Remove underline */
-    display: block; /* Each link takes a full line */
+    color: rgb(248, 244, 244);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
 }
 
+/* Dropdown link hover effect */
 .dropdown-content a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Highlight on hover */
+    background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* Initial hiding of mobile menu and hamburger/close buttons */
+.nav-right {
+    display: flex;
+}
+
+.hamburger,
+.close-menu {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger i,
+.close-menu i {
+    font-size: 24px;
+    color: white;
+}
+
+/* Media queries for mobile screens */
+@media (max-width: 768px) {
+    /* Show hamburger and hide close button by default */
+    .hamburger {
+        display: block;
+    }
+
+    .nav-right {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Position under the navigation */
+        right: -100%;
+        width: 100%;
+        height: 250px;
+        background-color: rgb(231, 77, 77);
+        z-index: 1000;
+        transition: right 0.3s ease;
+        padding: 20px 10px;
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    /* When the menu is visible */
+    .nav-right.show {
+        display: flex;
+        right: 0;
+    }
+
+    /* Position hamburger and close icons */
+    .hamburger {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    .close-menu {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        display: none;
+    }
+
+    /* Show the close icon when nav is active */
+    .nav-right.show ~ #close-menu {
+        display: block;
+    }
+
+    /* Hide the hamburger when nav is active */
+    .hamburger.hide {
+        display: none;
+    }
+
+    /* Align nav links to the left on mobile */
+    .nav-right a {
+        padding: 10px 0;
+        color: white;
+        text-align: left;
+        text-decoration: none;
+        width: 100%; /* Make the link area full width */
+    }
+}
+
 
 
 
 /******************** Container part *************************/
 
-.container1{
-    height: 560px;
+.container1 {
+    height: 560px; /* Fixed height for desktop */
     display: flex;
     justify-content: space-evenly;
     background: linear-gradient(135deg, #e77777, #ffffff);
-    /* background-image: url('../image/containter.jpg'); */
     object-fit: cover;
+    padding: 20px; /* Optional padding */
+    box-sizing: border-box; /* Include padding in height calculations */
 }
-.container-1{
-    margin-top: 130px;
+
+.container-1 {
+    margin-top: 130px; /* Margin for spacing on desktop */
 }
-.container-1 p{
+
+.container-1 h1 {
+    font-size: 2.5rem; /* Larger font size for headlines */
+}
+
+.container-1 p {
+    margin-top: 30px; /* Margin above paragraph */
+}
+
+.container-1 button {
+    height: 40px; /* Increased height for better touchability */
     margin-top: 30px;
+    background-color: red; /* Button color */
+    border: 1px solid white; /* Button border */
+    border-radius: 15px; /* Rounded corners */
+    transition: 0.5s; /* Transition effect */
+    cursor: pointer; /* Pointer cursor on hover */
 }
-.container-1 button{
-    height: 30px;
-    margin-top: 30px;
-    background-color: red;
-    border: 1px solid white;
-    border-radius: 15px;
-    transition: 0.5s;
-    cursor: pointer;
+
+.container-1 button:hover {
+    background-color: rgb(17, 16, 16); /* Hover color */
 }
-.container-1 button:hover{
-    background-color: rgb(17, 16, 16);
-    
+
+.container-1 button a {
+    text-decoration: none; /* No underline */
+    color: white; /* Text color */
 }
-.container-1 button a{
-    text-decoration: none;
-    color: white;
+
+.container-pic {
+    margin-top: 20px; /* Margin above image container */
 }
-.container-pic{
-    margin-top: 20px;
+
+#slideshow img {
+    height: 400px; /* Fixed height for images */
+    width: 400px; /* Fixed width for images */
 }
-#slideshow img{
-    height: 400px;
-    width: 400px;
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    .container1 {
+        flex-direction: column; /* Stack items vertically on mobile */
+        height: auto; /* Allow height to adjust based on content */
+        padding: 20px; /* Optional padding */
+    }
+
+    .container-1 {
+        margin-top: 20px; /* Adjust top margin for spacing */
+        padding: 20px; /* Padding for internal spacing */
+        text-align: left; /* Center align text */
+        
+        
+    }
+
+    .container-1 h1 {
+        font-size: 2rem; /* Adjust font size for mobile */
+        margin-bottom: 15px; /* Margin below the heading */
+        color: #333; /* Dark color for readability */
+    }
+
+    .container-1 p {
+        margin-top: 10px; /* Margin above paragraph */
+        font-size: 1.1rem; /* Adjust font size */
+        line-height: 1.6; /* Increase line height for readability */
+        color: #555; /* Lighter color for paragraph */
+    }
+
+    .container-1 button {
+        height: 40px; /* Increased height for better touchability */
+        margin-top: 20px;
+        background-color: rgb(243, 38, 38); /* Button color */
+        border: none; /* Remove border */
+        border-radius: 20px; /* Rounded corners */
+        transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+        cursor: pointer; /* Pointer cursor on hover */
+        padding: 0 20px; /* Horizontal padding */
+        color: white; /* Text color */
+        font-size: 1rem; /* Font size for button */
+    }
+
+    .container-1 button:hover {
+        background-color: rgb(17, 16, 16); /* Hover color */
+        transform: scale(1.05); /* Scale effect on hover */
+    }
+
+    .container-pic {
+        margin-top: 20px; /* Margin above image container */
+        display: flex; /* Center the image */
+        justify-content: center; /* Center the image horizontally */
+    }
+
+    #slideshow img {
+        width: 100%; /* Make image full width on mobile */
+        height: auto; /* Maintain aspect ratio */
+        max-width: 350px; /* Optional: max width for images */
+    }
 }
 
 
@@ -140,72 +298,26 @@
     padding-top: 20px;
     padding-bottom: 10px;
     background-color: rgb(248, 246, 246);
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center align items horizontally */
-    text-align: center; /* Center text within items */
-}
-.request-post h2 {
-    color: red;
-}
-/* ---------- */
-.post-user-info {
-    display: flex;
-    align-items: center;  /* Vertically center the items */
+    text-align: center;
 }
 
-.post-user-info p {
-    margin: 0 10px;  /* Add some space between the text elements */
-}
-.post-user-info h4{
-    margin-top: 5px;
-    margin-left: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    color: red;
-}
-.dp {
-    width: 25px;  /* Adjust width for the profile picture */
-    height: 25px;
-    object-fit: cover;  /* Ensure the image retains aspect ratio and fits in the circle */
-    margin-left: 10px;  /* Add space between image and text */
-    border-radius: 50%;
-}
-.request-post a {
-    text-decoration: none;
-    font-weight: 550;
-    color: black;
-}
 .all-post {
     display: flex;
-    align-items: center;
-    margin: 10px;  /* Center the container */
+    flex-wrap: wrap;
+    justify-content: center; /* Center the posts */
 }
 
 .post-page {
-    padding: 0px; /* Adjust padding if necessary */
-    
-}
-.post-page .create_at{
-    font-size: xx-small;
-    font-weight: bold;
-    text-align: left;
-    margin-left: 10px;
-}
-
-
-
-.update_time{
-    font-size: 12px;
-    margin-top: 5px;
-    text-align: left;
+    display: flex;
+    justify-content: center; /* Ensure each post is centered in its column */
 }
 
 .blood-request-card-alt_p {
-    width: 320px;
+    width: 100%; /* Full width of the column */
+    max-width: 320px; /* Limit maximum width */
     border-radius: 15px;
     overflow: hidden;
-    background: linear-gradient(135deg, #e4d9d9, #ffffff);
+    background: linear-gradient(135deg, #f1eded, #ec847d);
     color: #0a0909;
     box-shadow: 0 8px 15px rgba(180, 179, 179, 0.788);
     padding: 10px;
@@ -214,7 +326,6 @@
 .card-header_p {
     margin: auto;
     padding: 20px;
-    line-height: 0.1cm;
     text-align: center;
     border-bottom: 1px solid gray;
 }
@@ -222,52 +333,90 @@
 .card-header_p h2 {
     font-size: 3rem;
     font-weight: bold;
-    margin: 0px;
-}
-.card-header_p p {
-    margin-top: 10px;
-    font-size: 1.em;
-    font-weight: bold;
+    margin: 0;
 }
 
 .card-body_p {
     padding-left: 0;
     text-align: left;
     font-weight: bold;
-    line-height: 0.5cm;
+    line-height: 1.5;
     font-size: 15px;
     margin: 15px;
 }
 
-.card-body_p p {
-    margin: 10px 0;
-    font-size: 1em;
-}
-
-.location, .phone-number {
+.disease-name, .location, .phone-number, .number-of-bags {
     font-weight: bold;
-    font-size: 1.1em;
 }
 
 .phone-number::before {
-    content: '📞'; /* Phone emoji */
+    content: '📞';
 }
 
 .disease-name::before {
-    content: '🩺'; /* Stethoscope emoji */
-}
-
-.disease-name {
-    font-weight: bold; /* Corrected to apply font weight */
+    content: '🩺';
 }
 
 .blood-group::before {
-    content: '🩸'; /* Blood drop emoji */
+    content: '🩸';
 }
 
-.seemore{
-    margin-bottom: 10px;
+.post-user-info {
+    display: flex;
+    align-items: center;
 }
+
+.post-user-info h4 {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    color: red;
+}
+
+.dp {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+.create_at {
+    font-size: xx-small;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.seemore {
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: 550;
+    color: black;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+    .post-page {
+        flex: 0 0 48%; /* 2 posts per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .post-page {
+        flex: 0 0 48%; /* 2 posts per row on small screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .post-page {
+        flex: 0 0 100%; /* 1 post per row on extra small screens */
+    }
+}
+
+
+
 
 /*------------ donor profile  ----------------*/
 
@@ -291,8 +440,8 @@
     flex-wrap: wrap; /* Allows items to wrap to the next line */
     justify-content: center; /* Distribute items with equal spacing */
     margin-bottom: 10px;
-    margin-left: 40px;
-   
+
+
 }
 
 .donor-parts{
@@ -310,7 +459,7 @@
     height: 300px;
     border-radius: 10px;
     overflow: hidden;
-    background: linear-gradient(135deg, #e5b1b1, #ffffff);
+    background: linear-gradient(135deg, #ec9999, #ffffff);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
@@ -386,85 +535,7 @@
 }
 
 
-/*------------CSS for Search Donators----------------*/
-.search-donators{
-    height: 300px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.search{
-    width: 80%;
-    height: 200px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #f3eeee;
-    border-radius: 6px;
-}
-.search-area{
-    height: 25px;
-    width: 150px;
-    border-radius: 8px;
-}
-.bd-group p{
-    margin-bottom: 8px;
-}
-.search button{
-    height: 40px;
-    width: 100px;
-    border-radius: 8px;
-    background-color: red;
-    color: white;
-    font-weight: 550;
-    border: none;
-    transition: 0.5s;
-}
-.search button:hover{
-    background-color:black;
-    cursor: pointer;
-    transform: 5s;
-    
-}
-.totaldonor{
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.totaldonor button{
-    margin-bottom: 20px;
-    height: 30px;
-    width: 100px;
-    background-color: red;
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-    transition: 0.5s;
-}
-.totaldonor button:hover{
-    background-color: black;
-    cursor: pointer;
-}
-.totalhead{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    width: 75%;
-    background-color: red;
-    color: white;
-    margin-top: 20px;
-}
-.donors{
-    display: flex;
-    margin: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
+
 
 
 
@@ -549,52 +620,51 @@
 }
 .advantage h4 a{
     text-decoration: none;
-    color: white;
-    line-height: 30px;
+    color: rgb(241, 230, 230);
+    line-height: 25px;
+    font-size: medium;
 }
 .about{
     width: 400px;
 }
 
-.important-link a{
-    text-decoration: none;
-    color: rgb(238, 238, 238);
-    line-height: 30px;
-}
 
-.footer-2{
+.footer-2 {
     padding: 20px;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start; /* Align items to the start */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
     background-color: rgb(22, 21, 21);
     color: rgb(202, 192, 192);
 }
-.footer-2 h3{
+
+.footer-2 h3 {
     padding-bottom: 10px;
 }
-.address{
+
+.address {
     text-align: center;
     line-height: 15px;
-    color: white;
+    color: rgb(226, 217, 217);
 }
-.msg textarea{
-    background-color: rgb(29, 29, 37);
-    border-radius: 5px;
+
+.about {
+    width: 400px; /* Maintain width on larger screens */
 }
-.msg button{
-    background-color: rgb(6, 110, 110);
-    color: white;
-    height: 30px;
-    border-radius: 5px;
-    transition: 0.5s;
-    border: 0.5px solid gray;
-    cursor: pointer;
+
+/* Styles for Advantage Section */
+.advantage {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align items */
 }
-.msg button:hover{
-    background-color: rgb(75, 72, 72);
+
+.advantage h4 {
+    margin: 5px 0; /* Add vertical spacing between links */
 }
-.copyright{
+
+.copyright {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -603,6 +673,37 @@
     height: 40px;
     color: rgb(238, 238, 238);
 }
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    .footer-2 {
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center; 
+        padding: 20px; 
+    }
+
+    .about, .address, .msg {
+        width: 100%; /* Make sections full width */
+        text-align: center; /* Center text */
+        margin-bottom: 20px; /* Margin below each section */
+    }
+
+    .about {
+        padding: 20px 50px; /* Add left and right padding for better spacing */
+    }
+
+    .msg {
+        display: flex; /* Use flex for better alignment */
+        flex-direction: column; /* Stack advantage items */
+        align-items: center; /* Center align items */
+    }
+
+    .advantage h4 {
+        line-height: 25px; /* Maintain spacing */
+        color: rgb(241, 230, 230); /* Ensure text color is readable */
+    }
+}
+
 
 /* <============= request Post form ================> */
 .req-form .form-control{
@@ -624,17 +725,18 @@
 
 /* <=====================Profile Card====================> */
 
-.dp_card{
+.dp_card {
     display: flex;
     align-items: center;
     flex-direction: column;
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
 .profile-card-unique {
     display: flex;
     flex-direction: row;
-    width: 650px;
+    width: 650px; /* Default width for desktop */
     height: 300px;
     background: linear-gradient(135deg, #0e56b4, #e64862);
     border-radius: 10px;
@@ -666,8 +768,6 @@
     margin-top: 73px;
 }
 
-
-
 .profile-info-unique {
     flex: 2;
     padding: 20px 30px;
@@ -675,7 +775,8 @@
     z-index: 2;
     margin-left: 135px;
 }
-.profile-info-unique b{
+
+.profile-info-unique b {
     color: #ffffff;
 }
 
@@ -699,10 +800,12 @@
     padding: 20px;
     z-index: 2;
 }
-.profile-actions-unique a{
+
+.profile-actions-unique a {
     text-decoration: none;
     color: white;
 }
+
 .btn-unique {
     padding: 10px 20px;
     border: none;
@@ -710,7 +813,6 @@
     cursor: pointer;
     margin: 3px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-
 }
 
 .edit-btn-unique {
@@ -740,7 +842,6 @@
     clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
     z-index: 1;
 }
-
 
 /* Confirmation overlay */
 .confirmation-overlay {
@@ -798,6 +899,54 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Responsive design for mobile view */
+@media (max-width: 768px) {
+    .profile-card-unique {
+        width: 90%; /* Decrease width for mobile view */
+        flex-direction: column; /* Stack elements vertically */
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .profile-img-unique {
+        margin: 0 auto; /* Center the image */
+    }
+
+    .profile-info-unique {
+        margin-left: 0; /* Reset margin */
+        text-align: left; /* Center text on smaller screens */
+        height: 340px;
+        width: 500px;
+        padding-left: 70px;
+    }
+
+    .profile-actions-unique {
+        padding: 10px; /* Adjust padding for actions */
+        text-align: center; /* Center actions */
+    }
+
+    .profile-img-unique img {
+        width: 100px; /* Smaller image on mobile */
+        height: 100px;
+        margin-left: 140px;
+        margin-top: 50px;
+    }
+
+    .profile-name-unique {
+        font-size: 24px; /* Adjust font size */
+    }
+
+    .profile-blood-group-unique,
+    .profile-phone-unique,
+    .profile-address-unique {
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .btn-unique {
+        padding: 8px 16px; /* Adjust button size */
+    }
+}
+
 
 /* signUp form  */
 

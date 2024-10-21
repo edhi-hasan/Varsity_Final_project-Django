@@ -4,82 +4,81 @@
 {% block content %}
 
     
-        <!-- Container part -->
-        <div class="container1">
-            <div class="container-1">
-                <h1>The gift of blood is a gift<br />to someones life</h1>
-                <p>ShareBlood help with anything related to blood. It helps manage blood donations and events <br>where people can give blood. It also links up donors with people who need blood. <br> ShareBlood makes it simple to get involved in this important work.</p>
-                
-                {% if request.user.is_authenticated %}
-                <button><a href="{% url 'addRequest' %}">Add Blood Request</a></button>
-                {% else %}
-                <button> <a href="signup.html">Join as Donors</a></button>
-                {% endif %}
-                    
-                    
-            </div>
-            <div class="container-pic">
-                <div id="slideshow">
-                    <img src="{% static 'bloodology/image/img1.png' %}" id="image" />
-                </div>
-                <!-- Java Script for changing picture -->
-                <script>
-                    var images = [
-                        "{% static 'bloodology/image/img1.png' %}",
-                        "{% static 'bloodology/image/img2.png' %}",
-                        "{% static 'bloodology/image/img3.png' %}",
-                        "{% static 'bloodology/image/img6.png' %}",
-                        "{% static 'bloodology/image/img7.png' %}",
-                    ];
-                    var currentIndex = 0;
-                    var image = document.getElementById("image");
-                    setInterval(function () {
-                        currentIndex = (currentIndex + 1) % images.length;
-                        image.src = images[currentIndex];
-                    }, 3000); 
-                </script>
-            </div>
+    <!-- Container part -->
+    <div class="container1">
+        <div class="container-1">
+            <h1>The gift of blood is a gift<br />to someone's life</h1>
+            <p>ShareBlood helps with anything related to blood. It helps manage blood donations and events <br>where people can give blood. It also links up donors with people who need blood. <br> ShareBlood makes it simple to get involved in this important work.</p>
             
+            {% if request.user.is_authenticated %}
+            <button><a href="{% url 'addRequest' %}">Add Blood Request</a></button>
+            {% else %}
+            <button><a href="{% url 'signUp' %}">Join as Donors</a></button>
+            {% endif %}
         </div>
+        <div class="container-pic">
+            <div id="slideshow">
+                <img src="{% static 'bloodology/image/img1.png' %}" id="image" />
+            </div>
+            <!-- JavaScript for changing picture -->
+            <script>
+                var images = [
+                    "{% static 'bloodology/image/img1.png' %}",
+                    "{% static 'bloodology/image/img2.png' %}",
+                    "{% static 'bloodology/image/img3.png' %}",
+                    "{% static 'bloodology/image/img6.png' %}",
+                    "{% static 'bloodology/image/img7.png' %}",
+                ];
+                var currentIndex = 0;
+                var image = document.getElementById("image");
+                setInterval(function () {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    image.src = images[currentIndex];
+                }, 3000); 
+            </script>
+        </div> 
+    </div>
+    
     
         <!------------- Request Post For Blood ---------------->
-    
-        <div class="request-post justify-content-center">
+        <div class="request-post text-center">
             <h2><b>Blood Request Post</b></h2>
-            <div class="all-post row justify-content-center col-sm-11">  <!-- Added 'justify-content-center' class -->
-                {% for post in posts %}
-                    <div class="post-page col-md-4 mb-2">  <!-- Use Bootstrap column class and add margin-bottom -->
-                        <div class="blood-request-card-alt_p">
-                            <div class="card-header_p">
-                                <h2 class="blood-group">{{ post.blood_group }}</h2>
-                                <p class="date-time">{{ post.date_time }}</p>
-                            </div>
-                            <div class="card-body_p">
-                                <p class="disease-name" style='font: bold;'>Disease: {{ post.Disease_name }}</p>
-                                <p class="number-of-bags">Bags Needed: {{ post.No_of_bag }}</p>
-                                <p class="location">Medical: {{ post.medical_name }}</p>
-                                <p class="location">Location: {{ post.location }}</p>
-                                <p class="phone-number">Phone: {{ post.phone_number }}</p>
+            <div class="container">
+                <div class="all-post row justify-content-center"> <!-- Bootstrap grid system for centering -->
+                    {% for post in posts %}
+                        <div class="post-page col-lg-4 col-md-6 col-sm-8 col-12 mb-4 d-flex justify-content-center"> <!-- Responsive columns and center posts -->
+                            <div class="blood-request-card-alt_p">
+                                <div class="card-header_p">
+                                    <h2 class="blood-group">{{ post.blood_group }}</h2>
+                                    <p class="date-time">{{ post.date_time }}</p>
+                                </div>
+                                <div class="card-body_p">
+                                    <p class="disease-name">Disease: {{ post.Disease_name }}</p>
+                                    <p class="number-of-bags">Bags Needed: {{ post.No_of_bag }}</p>
+                                    <p class="location">Medical: {{ post.medical_name }}</p>
+                                    <p class="location">Location: {{ post.location }}</p>
+                                    <p class="phone-number">Phone: {{ post.phone_number }}</p>
+                                </div>
+                                <div class="post-user-info">
+                                    <img src="{{ post.user_profile.profile_img.url }}" alt="" class="dp">
+                                    <h4 class="user-name">{{ post.user_profile.name }}</h4>
+                                    <p class="create_at">Post at: {{ post.created_at }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="post-user-info">
-                            <img src="{{ post.user_profile.profile_img.url }}" alt="" class="dp" >
-                            <h4 class="user-name">{{ post.user_profile.name }}</h4>
-                            <p class="create_at">Post at: {{post.created_at}}</p>
-                        </div>
-
-                    </div>
-                {% empty %}
-                    <p>There are no blood request posts available.</p>  <!-- Message if no posts -->
-                {% endfor %}
+                    {% empty %}
+                        <p>There are no blood request posts available.</p>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'allRepPost' %}" class="seemore">See more...</a>
             </div>
-            <a href="{% url 'allRepPost' %}" class="seemore">See more...</a>
         </div>
         
         
-        
 
-        {% comment %} <----------------donors Profile----------------->  {% endcomment %}
+        
+        
+    {% comment %} <----------------donors Profile----------------->  {% endcomment %}
     <div class="donor_profile_sec">
         <h2>Donors profile</h2>
         

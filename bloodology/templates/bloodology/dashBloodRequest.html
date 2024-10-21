@@ -80,7 +80,9 @@
                     </div>
                     <p class="bltime">Postet on: {{post.created_at}}</p>
                 </div>
-                {% endfor %}
+                {% empty %}
+                <p>There are no blood request posts available.</p>
+            {% endfor %}
             </div>
         </div>
     </div>

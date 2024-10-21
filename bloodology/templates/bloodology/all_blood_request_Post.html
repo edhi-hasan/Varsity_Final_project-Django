@@ -3,31 +3,36 @@
 {% load static %}
 
 {% block content %}
-    <div class="request-post justify-content-center">
-        <div class="col-10">
-            <h2 class="p-2 mb-4 text-danger"><b >All Blood Request Post</b></h2>
-        </div>
-        <div class="all-post row justify-content-center col-sm-10">  <!-- Added 'justify-content-center' class -->
+<div class="request-post text-center">
+    <h2><b>Blood Request Post</b></h2>
+    <div class="container">
+        <div class="all-post row justify-content-center"> <!-- Bootstrap grid system for centering -->
             {% for post in posts %}
-                <div class="post-page col-md-4 mb-2">  <!-- Use Bootstrap column class and add margin-bottom -->
+                <div class="post-page col-lg-4 col-md-6 col-sm-8 col-12 mb-4 d-flex justify-content-center"> <!-- Responsive columns and center posts -->
                     <div class="blood-request-card-alt_p">
                         <div class="card-header_p">
                             <h2 class="blood-group">{{ post.blood_group }}</h2>
                             <p class="date-time">{{ post.date_time }}</p>
                         </div>
                         <div class="card-body_p">
-                            <p class="disease-name" style='font: bold;'>Disease: {{ post.Disease_name }}</p>
+                            <p class="disease-name">Disease: {{ post.Disease_name }}</p>
                             <p class="number-of-bags">Bags Needed: {{ post.No_of_bag }}</p>
                             <p class="location">Medical: {{ post.medical_name }}</p>
                             <p class="location">Location: {{ post.location }}</p>
                             <p class="phone-number">Phone: {{ post.phone_number }}</p>
                         </div>
+                        <div class="post-user-info">
+                            <img src="{{ post.user_profile.profile_img.url }}" alt="" class="dp">
+                            <h4 class="user-name">{{ post.user_profile.name }}</h4>
+                            <p class="create_at">Post at: {{ post.created_at }}</p>
+                        </div>
                     </div>
-                    <p class="create_at">Post at: {{post.created_at}}</p>
                 </div>
             {% empty %}
-                <p>There are no blood request posts available.</p>  <!-- Message if no posts -->
+                <p>There are no blood request posts available.</p>
             {% endfor %}
         </div>
+        <a href="{% url 'allRepPost' %}" class="seemore">See more...</a>
     </div>
+</div>
 {% endblock content %}
