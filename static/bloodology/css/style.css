@@ -186,14 +186,18 @@
     height: 560px; /* Fixed height for desktop */
     display: flex;
     justify-content: space-evenly;
-    background: linear-gradient(135deg, #e77777, #ffffff);
-    object-fit: cover;
     padding: 20px; /* Optional padding */
     box-sizing: border-box; /* Include padding in height calculations */
+    color: rgb(7, 7, 7);
+    
+    
+    
 }
 
 .container-1 {
     margin-top: 130px; /* Margin for spacing on desktop */
+    position: relative; 
+    z-index: 1;
 }
 
 .container-1 h1 {
@@ -304,17 +308,19 @@
 .all-post {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Center the posts */
+    justify-content: center;
+    
 }
 
 .post-page {
     display: flex;
-    justify-content: center; /* Ensure each post is centered in its column */
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
 .blood-request-card-alt_p {
     width: 100%; /* Full width of the column */
-    max-width: 320px; /* Limit maximum width */
+    max-width: 350px; /* Limit maximum width */
     border-radius: 15px;
     overflow: hidden;
     background: linear-gradient(135deg, #f1eded, #ec847d);
@@ -387,6 +393,7 @@
     font-weight: bold;
     text-align: left;
     margin-left: 10px;
+    margin-top: 15px;
 }
 
 .seemore {
@@ -397,6 +404,12 @@
 }
 
 /* Responsive design */
+@media (min-width: 992px) {
+    .post-page {
+        flex: 0 0 32%; /* 3 posts per row on large screens */
+    }
+}
+
 @media (max-width: 992px) {
     .post-page {
         flex: 0 0 48%; /* 2 posts per row on medium screens */
@@ -593,7 +606,7 @@
     margin: 10px;
     margin-top:20px ;
     margin-bottom: 20px;
-    height: 150px;
+    height: 180px;
     width: 300px;
     /* border: 1px solid black; */
     border-radius: 4px;
@@ -710,17 +723,6 @@
     background-color: rgb(241, 212, 212);
 }
 
-
-
-
-/* <=====================All Question====================> */
-
-.Question{
-    margin-left: 280px;
-    margin-right: 250px;
-    margin-top: 50px;
-    margin-bottom: 20px;
-}
 
 
 /* <=====================Profile Card====================> */
@@ -916,7 +918,7 @@
         margin-left: 0; /* Reset margin */
         text-align: left; /* Center text on smaller screens */
         height: 340px;
-        width: 500px;
+        width: 432px;
         padding-left: 70px;
     }
 
@@ -928,8 +930,8 @@
     .profile-img-unique img {
         width: 100px; /* Smaller image on mobile */
         height: 100px;
-        margin-left: 140px;
-        margin-top: 50px;
+        margin-left: 100px;
+        margin-top: 30px;
     }
 
     .profile-name-unique {
